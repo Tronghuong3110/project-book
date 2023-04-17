@@ -1,0 +1,18 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+.input-field {
+    width: 350px;
+    height: 48px;
+}
+
+.space-bottom {
+    margin-bottom: 20px;
+}
+
+.font-label {
+    font-size: 2rem;
+    font-weight: 600;
+    font-family: auto;
+}
