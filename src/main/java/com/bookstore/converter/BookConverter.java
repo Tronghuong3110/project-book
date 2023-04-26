@@ -43,7 +43,7 @@ public class BookConverter {
 		if(dto.getTitle() != null) {
 			book.setTitle(dto.getTitle());
 		}
-		if(dto.getTotal_page() != null) {
+		if(dto.getTotal_page() != null ) {
 			book.setTotal_page(dto.getTotal_page());
 		}
 		if(dto.getDecription() != null) {

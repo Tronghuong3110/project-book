@@ -14,4 +14,5 @@ public interface IBookService {
 	BookDto findOne(Long id);
 	BookDto saveOrUpdate(BookDto book, Long categoryId);
 	String saveFile(MultipartFile file) throws IOException;
+	void delete(Long id);
 }

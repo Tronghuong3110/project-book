@@ -8,4 +8,5 @@ import com.bookstore.model.entity.CategoryEntity;
 @Repository
 public interface CategoryRepository extends JpaRepository<CategoryEntity, Long>{
 	boolean existsByNameAndCode(String name, String code);
+	CategoryEntity findOneByNameAndCode(String name, String code);
 }

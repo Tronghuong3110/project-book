@@ -3,16 +3,16 @@ package com.bookstore.model.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinColumns;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "role")
@@ -29,12 +29,7 @@ public class RoleEntity {
 	@Column(name = "code", columnDefinition = "nvarchar(150)")
 	private String code;
 	
-	@ManyToMany
-	@JoinTable(
-			name = "user_role",
-			joinColumns = @JoinColumn(name = "role_id"),
-			inverseJoinColumns = @JoinColumn(name = "user_id")
-	)
+	@ManyToMany(mappedBy = "roles")
 	List<UserEntity> users = new ArrayList<>();
 	
 

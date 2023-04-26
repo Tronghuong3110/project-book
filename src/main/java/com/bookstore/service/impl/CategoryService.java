@@ -33,17 +33,28 @@ public class CategoryService implements ICategoryService{
 	@Override
 	public CategoryDto saveOrUpdate(CategoryDto category) {
 		CategoryEntity entity = new CategoryEntity();
+		CategoryEntity oldCategory = categoryRepository.findOneByNameAndCode(category.getName(), Constants.standardized(category.getCode()));
+		
 		if(category.getId() == null) {
 			entity = save(category);
+			// check code cos trung khong
+			if(oldCategory != null) {
+				return null;
+			}
 		}
 		else {
-			entity = update(category);
+			if(oldCategory == null || (oldCategory != null && oldCategory.getId().equals(category.getId()))) {
+				entity = update(category);
+			}
+			else {
+				return null;
+			}
 		}
-		if(!categoryRepository.existsByNameAndCode(entity.getName(), entity.getCode())) {
+		//if(!categoryRepository.existsByNameAndCode(entity.getName(), entity.getCode())) {
 			categoryRepository.save(entity);
 			return CategoryConverter.toDto(entity);
-		}
-		return null;
+		//}
+//		return null;
 	}
 	
 	private CategoryEntity save(CategoryDto dto) {

@@ -3,16 +3,18 @@ package com.bookstore.model.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "userrr")
@@ -30,13 +32,18 @@ public class UserEntity {
 	@Column(name = "fullname", columnDefinition = "nvarchar(150)")
 	private String fullName;
 	
-	@Column(name = "password", columnDefinition = "varchar(150)")
+	@Column(name = "password", columnDefinition = "text")
 	private String passWord;
 	
 	@Column(name = "email", columnDefinition = "varchar(150)")
 	private String email;
 	
-	@ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "user_role",
+			joinColumns = @JoinColumn(name = "user_id"),
+			inverseJoinColumns = @JoinColumn(name = "role_id")
+	)
 	List<RoleEntity> roles = new ArrayList<>();
 	
 	@OneToOne(mappedBy = "user")
@@ -104,6 +111,5 @@ public class UserEntity {
 	public void setReviews(List<ReviewEntity> reviews) {
 		this.reviews = reviews;
 	}
-	
 	
 }
