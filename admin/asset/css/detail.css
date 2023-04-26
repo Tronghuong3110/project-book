@@ -5,6 +5,8 @@
 .input-field {
     width: 350px;
     height: 48px;
+    font-family: auto !important;
+    padding: 10px !important;
 }
 
 .space-bottom {
@@ -15,4 +17,14 @@
     font-size: 2rem;
     font-weight: 600;
     font-family: auto;
+}
+
+.btn-addoredit {
+    width: 100%;
+    font-size: 3rem;
+}
+
+.js-btn-save,
+.js-btn-add {
+    display: none;
 }

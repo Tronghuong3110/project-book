@@ -11,3 +11,29 @@
     font-size: 2rem;
     font-family: auto;
 }
+
+/* .modal-add-category {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0.5;
+} */
+
+.input-field {
+    width: 100%;
+    height: 51px;
+    padding: 12px !important;
+}
+
+.label-text {
+    font-size: 2rem;
+    font-family: auto;
+    font-weight: 600;
+}
+
+.clear {
+    height: 20px;
+}

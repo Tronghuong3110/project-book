@@ -4,7 +4,7 @@
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<meta charset="utf-8" />
-	<title>Chi tiết sách</title>
+	<title>Danh sách thể loại</title>
 
 	<meta name="description" content="overview &amp; stats" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
@@ -24,7 +24,7 @@
 	<script src="./asset/assets/js/ace-extra.min.js"></script>
 
 	<!-- css -->
-	<link rel="stylesheet" href="./asset/css/detail.css">
+	<link rel="stylesheet" href="./asset/css/stylle.css">
 </head>
 
 <body class="no-skin">
@@ -62,6 +62,7 @@
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
 								<img class="nav-user-photo" src="./asset/assets/avatars/user.jpg" alt="Jason's Photo" />
 								<span class="user-info">
+								</span>
 
 								<i class="ace-icon fa fa-caret-down"></i>
 							</a>
@@ -141,7 +142,7 @@
 
 
 					<li class="">
-						<a href="./index.html" class="dropdown-toggle">
+						<a href="/index.html" class="dropdown-toggle">
 							<i class="menu-icon fa fa-desktop"></i>
 							<span class="menu-text">
 								Danh sách
@@ -163,15 +164,12 @@
 							</li>
 
 							<li class="">
-								<a href="/admin/category.html">
+								<a href="#" class="dropdown-toggle">
 									<i class="menu-icon fa fa-caret-right"></i>
-
 									Danh sách thể loại
-									<!-- <b class="arrow fa fa-angle-down"></b> -->
 								</a>
 
 								<b class="arrow"></b>
-
 							</li>
 
 							<li class="">
@@ -237,11 +235,33 @@
 
 					<!-- Begin body -->
 					<div class="page-content">
+						<div style="display: flex; margin-bottom: 10px; justify-content: flex-end;">
+							<!-- <button type="button" class="btn btn-success btn-addoredit" style="width: 200px; height: 54px ;font-size: 2.5rem;">Add category</button> -->
+							<button type="button" class="btn btn-success" onclick="openModalAdd()" data-toggle="modal"
+								data-target="#myModal" style="width: 200px; height: 54px ;font-size: 2.5rem;">Add
+								category</button>
+						</div>
 						<!-- Table danh sách sách -->
 						<!-- begin body -->
-						<form class="row js-infor-book">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="table-responsive">
+									<table class="table table-bordered">
+										<thead>
+											<tr>
+												<th class="tdItem">ID</th>
+												<th class="tdItem">Tên thể loại</th>
+												<th class="tdItem">Mã thể loại</th>
+												<th class="tdItem">Thao tác</th>
+											</tr>
+										</thead>
+										<tbody class="js-render-list">
 
-						</form>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
 						<!-- End body -->
 					</div><!-- /.page-content -->
 					<!-- Ennd body -->
@@ -251,33 +271,70 @@
 
 			<div class="footer">
 				<div class="footer-inner">
-					<div class="footer-content" style="height: 78px;">
-						<div class="row">
-							<div class="col-lg-4">
-								<button type="button" class="btn btn-success btn-addoredit js-btn-edit">Edit</button>
-								<button type="submit" class="btn btn-success btn-addoredit js-btn-save">Save</button>
-							</div>
+					<div class="footer-content">
+						<span class="bigger-120">
+							<span class="blue bolder">Ace</span>
+							Application &copy; 2013-2014
+						</span>
 
-							<div class="col-lg-4">
-								<h1>Đây là footer</h1>
-							</div>
+						&nbsp; &nbsp;
+						<span class="action-buttons">
+							<a href="#">
+								<i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+							</a>
 
-							<div class="col-lg-4">
-								<button type="button" class="btn btn-success btn-addoredit js-btn-add">Add book</button>
-							</div>
-						</div>
+							<a href="#">
+								<i class="ace-icon fa fa-facebook-square text-primary bigger-150"></i>
+							</a>
+
+							<a href="#">
+								<i class="ace-icon fa fa-rss-square orange bigger-150"></i>
+							</a>
+						</span>
 					</div>
 				</div>
-
 			</div>
 
 			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
 				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
 			</a>
 		</div><!-- /.main-container -->
-	</div>
 
-	<!-- Model create category -->
+		<!-- Modal create category -->
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<!-- header of modal -->
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<div class="title-modal"></div>
+					</div>
+					<!-- Body of modal -->
+					<div class="modal-body">
+						<form class="form-category">
+							<label for="name" class="label-text js-text-header">Tên thể loại</label>
+							<input type="text" name="name" id="name" class="input-field"
+								placeholder="Tên thể loại (Tiểu thyết,...)" required>
+							<div class="clear"></div>
+							<label for="code" class="label-text">Mã thể loại</label>
+							<input type="text" id="code" name="code" class="input-field"
+								placeholder="Mã thể loại (tieu-thuyet,....)" required>
+							<div class="clear"></div>
+							<input type="hidden" name="id" id="id">
+							<button type="submit" class="btn btn-success btn-save"
+								style="width: 100%; height: 54px ;font-size: 2.5rem;">Save</button>
+						</form>
+					</div>
+					<!-- footer of modal -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<!--[if !IE]> -->
 	<script src="./asset/assets/js/jquery.2.1.1.min.js"></script>
@@ -285,13 +342,17 @@
 	<!-- <![endif]-->
 
 	<!--[if IE]>
-<script src="assets/js/jquery.1.11.1.min.js"></script>
-<![endif]-->
+		<script src="assets/js/jquery.1.11.1.min.js"></script>
+		<![endif]-->
 
 	<!--[if !IE]> -->
 	<script type="text/javascript">
 		window.jQuery || document.write("<script src='./asset/assets/js/jquery.min.js'>" + "<" + "/script>");
 	</script>
+
+	<!-- JS call api -->
+	<script src="./asset/js/category.js"></script>
+	<script src="./asset/js/authentication.js"></script>
 
 	<script type="text/javascript">
 		if ('ontouchstart' in document.documentElement) document.write("<script src='./asset/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
@@ -309,14 +370,6 @@
 	<!-- ace scripts -->
 	<script src="./asset/assets/js/ace-elements.min.js"></script>
 	<script src="./asset/assets/js/ace.min.js"></script>
-
-	<!-- JS call api -->
-	<script src="./asset/js/detail.js"></script>
-	<script src="./asset/js/authentication.js"></script>
-
-	<script>
-
-	</script>
 </body>
 
 </html>

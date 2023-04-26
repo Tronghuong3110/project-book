@@ -1,39 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-		<meta charset="utf-8" />
-		<title>Trang chủ</title>
 
-		<meta name="description" content="overview &amp; stats" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta charset="utf-8" />
+	<title>Trang chủ</title>
 
-		<!-- bootstrap & fontawesome -->
-        <link rel="stylesheet" href="./asset/assets/css/bootstrap.min.css">
-        <link rel="stylesheet" href="./asset/assets/font-awesome/4.2.0/css/font-awesome.min.css">
+	<meta name="description" content="overview &amp; stats" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
-		<!-- page specific plugin styles -->
+	<!-- bootstrap & fontawesome -->
+	<link rel="stylesheet" href="./asset/assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="./asset/assets/font-awesome/4.2.0/css/font-awesome.min.css">
 
-		<!-- text fonts -->
-        <link rel="stylesheet" href="./asset/assets/fonts/fonts.googleapis.com.css">
+	<!-- page specific plugin styles -->
 
-		<!-- ace styles -->
-        <link rel="stylesheet" href="./asset/assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style">
+	<!-- text fonts -->
+	<link rel="stylesheet" href="./asset/assets/fonts/fonts.googleapis.com.css">
 
-        <script src="./asset/assets/js/ace-extra.min.js"></script>
+	<!-- ace styles -->
+	<link rel="stylesheet" href="./asset/assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style">
 
-        <!-- css -->
-        <link rel="stylesheet" href="./asset/css/stylle.css">
-	</head>
+	<script src="./asset/assets/js/ace-extra.min.js"></script>
 
-	<body class="no-skin">
+	<!-- css -->
+	<link rel="stylesheet" href="./asset/css/stylle.css">
+</head>
+
+<body class="no-skin">
+	<div class="remove">
 		<div id="navbar" class="navbar navbar-default">
 			<script type="text/javascript">
-				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+				try { ace.settings.check('navbar', 'fixed') } catch (e) { }
 			</script>
 
 			<div class="navbar-container" id="navbar-container">
-				<button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+				<button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler"
+					data-target="#sidebar">
 					<span class="sr-only">Toggle sidebar</span>
 
 					<span class="icon-bar"></span>
@@ -54,19 +57,18 @@
 
 				<div class="navbar-buttons navbar-header pull-right" role="navigation">
 					<ul class="nav ace-nav">
-						
+
 						<li class="light-blue">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
 								<img class="nav-user-photo" src="./asset/assets/avatars/user.jpg" alt="Jason's Photo" />
 								<span class="user-info">
-									<small>Welcome,</small>
-									Jason
 								</span>
 
 								<i class="ace-icon fa fa-caret-down"></i>
 							</a>
 
-							<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+							<ul
+								class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 								<li>
 									<a href="#">
 										<i class="ace-icon fa fa-cog"></i>
@@ -84,7 +86,7 @@
 								<li class="divider"></li>
 
 								<li>
-									<a href="#">
+									<a href="#" class="logout">
 										<i class="ace-icon fa fa-power-off"></i>
 										Logout
 									</a>
@@ -98,12 +100,12 @@
 
 		<div class="main-container" id="main-container">
 			<script type="text/javascript">
-				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+				try { ace.settings.check('main-container', 'fixed') } catch (e) { }
 			</script>
 
 			<div id="sidebar" class="sidebar                  responsive">
 				<script type="text/javascript">
-					try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+					try { ace.settings.check('sidebar', 'fixed') } catch (e) { }
 				</script>
 
 				<div class="sidebar-shortcuts" id="sidebar-shortcuts">
@@ -137,7 +139,7 @@
 				</div><!-- /.sidebar-shortcuts -->
 
 				<ul class="nav nav-list">
-					
+
 
 					<li class="">
 						<a href="#" class="dropdown-toggle">
@@ -155,74 +157,28 @@
 							<li class="">
 								<a href="#" class="dropdown-toggle">
 									<i class="menu-icon fa fa-caret-right"></i>
+									Danh sách sách
+								</a>
 
-									Layouts
-									<b class="arrow fa fa-angle-down"></b>
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a href="category.html">
+									<i class="menu-icon fa fa-caret-right"></i>
+
+									Danh sách thể loại
+									<!-- <b class="arrow fa fa-angle-down"></b> -->
 								</a>
 
 								<b class="arrow"></b>
 
-								<ul class="submenu">
-									<li class="">
-										<a href="#">
-											<i class="menu-icon fa fa-caret-right"></i>
-											Top Menu
-										</a>
-
-										<b class="arrow"></b>
-									</li>
-
-									<li class="">
-										<a href="#">
-											<i class="menu-icon fa fa-caret-right"></i>
-											Two Menus 1
-										</a>
-
-										<b class="arrow"></b>
-									</li>
-
-									<li class="">
-										<a href="#">
-											<i class="menu-icon fa fa-caret-right"></i>
-											Two Menus 2
-										</a>
-
-										<b class="arrow"></b>
-									</li>
-
-									<li class="">
-										<a href="#">
-											<i class="menu-icon fa fa-caret-right"></i>
-											Default Mobile Menu
-										</a>
-
-										<b class="arrow"></b>
-									</li>
-
-									<li class="">
-										<a href="#">
-											<i class="menu-icon fa fa-caret-right"></i>
-											Mobile Menu 2
-										</a>
-
-										<b class="arrow"></b>
-									</li>
-
-									<li class="">
-										<a href="#">
-											<i class="menu-icon fa fa-caret-right"></i>
-											Mobile Menu 3
-										</a>
-
-										<b class="arrow"></b>
-									</li>
-								</ul>
 							</li>
 
 							<li class="">
 								<a href="#">
 									<i class="menu-icon fa fa-caret-right"></i>
-									Typography
+									Danh sách người dùng
 								</a>
 
 								<b class="arrow"></b>
@@ -231,113 +187,35 @@
 							<li class="">
 								<a href="#">
 									<i class="menu-icon fa fa-caret-right"></i>
-									Elements
+									Danh sách hóa đơn
 								</a>
 
 								<b class="arrow"></b>
 							</li>
 
-							<li class="">
-								<a href="#">
-									<i class="menu-icon fa fa-caret-right"></i>
-									Buttons &amp; Icons
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-
-							<li class="">
-								<a href="#">
-									<i class="menu-icon fa fa-caret-right"></i>
-									Content Sliders
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-
-							<li class="">
-								<a href="#">
-									<i class="menu-icon fa fa-caret-right"></i>
-									Treeview
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-
-							<li class="">
-								<a href="#" class="dropdown-toggle">
-									<i class="menu-icon fa fa-caret-right"></i>
-
-									Three Level Menu
-									<b class="arrow fa fa-angle-down"></b>
-								</a>
-
-								<b class="arrow"></b>
-
-								<ul class="submenu">
-									<li class="">
-										<a href="#">
-											<i class="menu-icon fa fa-leaf green"></i>
-											Item #1
-										</a>
-
-										<b class="arrow"></b>
-									</li>
-
-									<li class="">
-										<a href="#" class="dropdown-toggle">
-											<i class="menu-icon fa fa-pencil orange"></i>
-
-											4th level
-											<b class="arrow fa fa-angle-down"></b>
-										</a>
-
-										<b class="arrow"></b>
-
-										<ul class="submenu">
-											<li class="">
-												<a href="#">
-													<i class="menu-icon fa fa-plus purple"></i>
-													Add Product
-												</a>
-
-												<b class="arrow"></b>
-											</li>
-
-											<li class="">
-												<a href="#">
-													<i class="menu-icon fa fa-eye pink"></i>
-													View Products
-												</a>
-
-												<b class="arrow"></b>
-											</li>
-										</ul>
-									</li>
-								</ul>
-							</li>
 						</ul>
 					</li>
-					
+
 				</ul><!-- /.nav-list -->
 
 				<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
-					<i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+					<i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left"
+						data-icon2="ace-icon fa fa-angle-double-right"></i>
 				</div>
 
 				<script type="text/javascript">
-					try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+					try { ace.settings.check('sidebar', 'collapsed') } catch (e) { }
 				</script>
 			</div>
 
 			<div class="main-content">
 				<div class="main-content-inner">
 					<div class="breadcrumbs" id="breadcrumbs" style="height: 70px;
-                                                                        display: flex;
-                                                                        justify-content: space-between;
-                                                                        align-items: center;">
+																			display: flex;
+																			justify-content: space-between;
+																			align-items: center;">
 						<script type="text/javascript">
-							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+							try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
 						</script>
 
 						<ul class="breadcrumb">
@@ -347,45 +225,50 @@
 							</li>
 						</ul><!-- /.breadcrumb -->
 
-                        <span class="input-icon">
-                            <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" style="width: 400px;
-                                                                                                                                            padding: 0 45px;
-                                                                                                                                            font-size: 2rem;
-                                                                                                                                            height: 52px;"/>
-                            <i class="ace-icon fa fa-search nav-search-icon" style="top: 21%; font-size: 3rem;"></i>
-                        </span>
+						<span class="input-icon">
+							<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input"
+								autocomplete="off" style="width: 400px;
+																																				padding: 0 45px;
+																																				font-size: 2rem;
+																																				height: 52px;" />
+							<i class="ace-icon fa fa-search nav-search-icon" style="top: 21%; font-size: 3rem;"></i>
+						</span>
 						<!-- /.nav-search -->
 					</div>
 
-                    <!-- Begin body -->
+					<!-- Begin body -->
 					<div class="page-content">
+						<div style="display: flex; margin-bottom: 10px; justify-content: flex-end;">
+							<a href="detail.html?id=-1"><button type="button" class="btn btn-success btn-addoredit"
+									style="width: 200px; height: 54px ;font-size: 2.5rem;">Add book</button></a>
+						</div>
 						<!-- Table danh sách sách -->
-                        <!-- begin body -->
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th class="tdItem">Tiêu đề</th>
-                                                <th class="tdItem">Tác giả</th>
-                                                <th class="tdItem">Thể loại</th>
-                                                <th class="tdItem">Ngày phát hành</th>
-                                                <th class="tdItem">Số trang</th>
-                                                <th class="tdItem">Số lượng đã bán</th>
-                                                <th class="tdItem">Thao tác</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="js-render-list">
-                                            
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End body -->
+						<!-- begin body -->
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="table-responsive">
+									<table class="table table-bordered">
+										<thead>
+											<tr>
+												<th class="tdItem">Tiêu đề</th>
+												<th class="tdItem">Tác giả</th>
+												<th class="tdItem">Thể loại</th>
+												<th class="tdItem">Ngày phát hành</th>
+												<th class="tdItem">Số trang</th>
+												<th class="tdItem">Số lượng đã bán</th>
+												<th class="tdItem">Thao tác</th>
+											</tr>
+										</thead>
+										<tbody class="js-render-list">
+
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<!-- End body -->
 					</div><!-- /.page-content -->
-                    <!-- Ennd body -->
+					<!-- Ennd body -->
 
 				</div>
 			</div><!-- /.main-content -->
@@ -420,46 +303,44 @@
 				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
 			</a>
 		</div><!-- /.main-container -->
+	</div>
 
-		<!-- basic scripts -->
+	<!-- basic scripts -->
 
-		<!--[if !IE]> -->
-        <script src="./asset/assets/js/jquery.2.1.1.min.js"></script>
+	<!--[if !IE]> -->
+	<script src="./asset/assets/js/jquery.2.1.1.min.js"></script>
 
-		<!-- <![endif]-->
+	<!-- <![endif]-->
 
-		<!--[if IE]>
-<script src="assets/js/jquery.1.11.1.min.js"></script>
-<![endif]-->
+	<!--[if IE]>
+	<script src="assets/js/jquery.1.11.1.min.js"></script>
+	<![endif]-->
 
-		<!--[if !IE]> -->
-		<script type="text/javascript">
-			window.jQuery || document.write("<script src='./asset/assets/js/jquery.min.js'>"+"<"+"/script>");
-		</script>
+	<!--[if !IE]> -->
+	<script type="text/javascript">
+		window.jQuery || document.write("<script src='./asset/assets/js/jquery.min.js'>" + "<" + "/script>");
+	</script>
 
-        <!-- JS call api -->
-        <script src="./asset/js/main.js"></script>
+	<!-- JS call api -->
+	<script src="./asset/js/main.js"></script>
+	<script src="./asset/js/authentication.js"></script>
 
-		<script type="text/javascript">
-			if('ontouchstart' in document.documentElement) document.write("<script src='./asset/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
-		</script>
-        <script src="./asset/assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		if ('ontouchstart' in document.documentElement) document.write("<script src='./asset/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+	</script>
+	<script src="./asset/assets/js/bootstrap.min.js"></script>
 
-		<script src="./asset/assets/js/jquery-ui.custom.min.js"></script>
-		<script src="./asset/assets/js/jquery.ui.touch-punch.min.js"></script>
-		<script src="./asset/assets/js/jquery.easypiechart.min.js"></script>
-		<script src="./asset/assets/js/jquery.sparkline.min.js"></script>
-		<script src="./asset/assets/js/jquery.flot.min.js"></script>
-		<script src="./asset/assets/js/jquery.flot.pie.min.js"></script>
-		<script src="./asset/assets/js/jquery.flot.resize.min.js"></script>
+	<script src="./asset/assets/js/jquery-ui.custom.min.js"></script>
+	<script src="./asset/assets/js/jquery.ui.touch-punch.min.js"></script>
+	<script src="./asset/assets/js/jquery.easypiechart.min.js"></script>
+	<script src="./asset/assets/js/jquery.sparkline.min.js"></script>
+	<script src="./asset/assets/js/jquery.flot.min.js"></script>
+	<script src="./asset/assets/js/jquery.flot.pie.min.js"></script>
+	<script src="./asset/assets/js/jquery.flot.resize.min.js"></script>
 
-		<!-- ace scripts -->
-		<script src="./asset/assets/js/ace-elements.min.js"></script>
-		<script src="./asset/assets/js/ace.min.js"></script>
+	<!-- ace scripts -->
+	<script src="./asset/assets/js/ace-elements.min.js"></script>
+	<script src="./asset/assets/js/ace.min.js"></script>
+</body>
 
-		<!-- inline scripts related to this page -->
-		<script type="text/javascript">
-			
-		</script>
-	</body>
 </html>

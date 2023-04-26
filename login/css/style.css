@@ -1,0 +1,26 @@
+.divider:after,
+.divider:before {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #eee;
+}
+
+.h-custom {
+    height: calc(100% - 73px);
+}
+
+@media (max-width: 450px) {
+    .h-custom {
+        height: 100%;
+    }
+}
+
+.font-13rem-weight500 {
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+.font-12rem {
+    font-size: 1.2rem;
+}
