@@ -39,7 +39,8 @@ public class JwtTokenFilter extends OncePerRequestFilter{
 				String userName = jwtProvider.getUserNameFromToken(token);
 				 // load user by userName form database
 				UserDetails userDetails = userDetailService.loadUserByUsername(userName);
-				
+				System.out.println("User Detail: " + userDetails.getAuthorities());
+//				System.out.println("role: " + userDetails.getAuthorities());
 				UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
 																			userDetails,
 																			null,
@@ -57,10 +58,11 @@ public class JwtTokenFilter extends OncePerRequestFilter{
 	
 	private String getToken(HttpServletRequest request) {
 		String authHeader = request.getHeader("Authorization");
-		
 		// ktra header Authorization co chua JWT khong
 		if(StringUtils.hasText(authHeader) && authHeader.startsWith("Bearer")) {
-			return authHeader.replace("Bearer", "");
+			authHeader = authHeader.replace("Bearer ", "");
+			System.out.println(authHeader);
+			return authHeader;
 		}
 		return null;
 	}

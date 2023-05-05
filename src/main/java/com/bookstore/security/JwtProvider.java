@@ -35,7 +35,8 @@ public class JwtProvider {
 		String token = Jwts.builder()
 				.setSubject(userName)
 				.setIssuedAt(new Date()) // set o thoi diem nao
-				.setExpiration(expireDate) // set thoi gian song cua token
+				.setExpiration(expireDate)// set thoi gian song cua token
+				.claim("role", "ADMIN")
 				.signWith(SignatureAlgorithm.HS512, jwtSecret)
 				.compact();
 				

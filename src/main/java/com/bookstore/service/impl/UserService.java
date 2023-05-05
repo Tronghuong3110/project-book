@@ -1,6 +1,7 @@
 package com.bookstore.service.impl;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -20,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -45,26 +47,26 @@ public class UserService implements IUserService {
 	@Override
 	public String createUser(UserDto user) {
 		if (!Constants.validateEmail(user.getEmail())) {
-			return "INVALID Email";
+			return "Email không hợp lệ, vui lòng nhập lại email!";
 		}
 		if(userRepository.existsByUserName(user.getUserName())) {
-			return "The user name existed! Please try again";
+			return "UserName đã tồn tại, vui lòng thử lại!";
 		}
 		if(userRepository.existsByEmail(user.getEmail())) {
-			return "The email existed! Please try again";
+			return "Email đã tồn tại, vui lòng thử lại!";
 		}
 		List<RoleEntity> roles = new ArrayList<>();
 		UserEntity userEntity = UserConverter.toEntity(user);
 //		RoleEntity role = roleRepository.findByName("USER")
 //				.orElseThrow(() -> null);
 		RoleEntity role = roleRepository.findByName("USER")
-				.orElseThrow(() -> new NoSuchElementException("No role found"));
+				.orElseThrow(() -> new NoSuchElementException("No role found!"));
 		roles.add(role);
 		userEntity.setRoles(roles);
 		userEntity.setPassWord(passwordEncoder.encode(user.getPassword()));
 
 		userRepository.save(userEntity);
-		return "Create user success";
+		return "User register successfully!";
 	}
 
 	@Override
@@ -77,6 +79,18 @@ public class UserService implements IUserService {
 		Myuser myUser = (Myuser) authentication.getPrincipal();
 		ResponseLogin response = new ResponseLogin(myUser.getId(), token, myUser.getFullName(), myUser.getAuthorities());
 		return response;
+	}
+
+	@Override
+	public List<UserDto> findAll() {
+//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//		Collection<? extends GrantedAuthority> roles = authentication.getAuthorities();
+		List<UserEntity> entities = userRepository.findAll();
+		List<UserDto> results = new ArrayList<>();
+		for(UserEntity entity : entities) {
+			results.add(UserConverter.toDto(entity));
+		}
+		return results;
 	}
 
 }

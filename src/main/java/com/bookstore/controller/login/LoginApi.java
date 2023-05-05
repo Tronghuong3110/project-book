@@ -17,7 +17,7 @@ import com.bookstore.service.IUserService;
 @RestController
 @RequestMapping("/api/auth")
 @CrossOrigin
-public class LoginController {
+public class LoginApi {
 	
 	@Autowired
 	private IUserService userService;

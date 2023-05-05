@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.util.Date;
 
 
 @Entity
@@ -25,6 +26,12 @@ public class ReviewEntity {
 	
 	@Column(name = "star")
 	private Integer star;
+
+	@Column(name = "create_date", columnDefinition = "date")
+	private Date createDate;
+
+	@Column(name = "modified_date", columnDefinition = "date")
+	private Date modifiedDate;
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
@@ -69,5 +76,20 @@ public class ReviewEntity {
 	public void setBook(BookEntity book) {
 		this.book = book;
 	}
-	
+
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
+	public Date getModifiedDate() {
+		return modifiedDate;
+	}
+
+	public void setModifiedDate(Date modifiedDate) {
+		this.modifiedDate = modifiedDate;
+	}
 }

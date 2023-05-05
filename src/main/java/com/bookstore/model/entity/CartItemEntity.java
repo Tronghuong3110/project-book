@@ -23,6 +23,9 @@ public class CartItemEntity {
 	
 	@Column(name = "status")
 	private Integer status;
+
+	@Column(name = "total_price", columnDefinition = "float")
+	private Double totalPrice;
 	
 	@ManyToOne
 	@JoinColumn(name = "book_id")
@@ -59,6 +62,13 @@ public class CartItemEntity {
 	public void setCart(CartEntity cart) {
 		this.cart = cart;
 	}
-	
-	
+
+
+	public Double getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(Double totalPrice) {
+		this.totalPrice = totalPrice;
+	}
 }

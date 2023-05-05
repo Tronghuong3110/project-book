@@ -1,10 +1,16 @@
 package com.bookstore.model.dto;
 
+import java.util.Date;
+
 public class ReviewDto {
 	
 	private Long id;
 	private String comment;
 	private Integer star;
+	private UserDto user;
+	private Date createDate;
+	private Date modifiedDate;
+
 	public Long getId() {
 		return id;
 	}
@@ -23,5 +29,28 @@ public class ReviewDto {
 	public void setStar(Integer star) {
 		this.star = star;
 	}
-	
+
+	public UserDto getUser() {
+		return user;
+	}
+
+	public void setUser(UserDto user) {
+		this.user = user;
+	}
+
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
+	public Date getModifiedDate() {
+		return modifiedDate;
+	}
+
+	public void setModifiedDate(Date modifiedDate) {
+		this.modifiedDate = modifiedDate;
+	}
 }

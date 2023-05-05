@@ -37,10 +37,11 @@ public class BookService implements IBookService{
 	
 	@Autowired
 	private ReviewRepository reviewRepository;
-	
+
+	// get all book in database
 	@Override
 	public List<BookDto> findAll() {
-		List<BookEntity> listEntity = bookRepository.findAll();
+		List<BookEntity> listEntity = bookRepository.findAllByStatus(0);
 		List<BookDto> results = new ArrayList<>();
 		for(BookEntity entity : listEntity) {
 			results.add(BookConverter.toDto(entity));
@@ -50,16 +51,17 @@ public class BookService implements IBookService{
 
 	@Override
 	public BookDto findOne(Long id) {
-		BookEntity entity = bookRepository.findById(id)
+		BookEntity entity = bookRepository.findOneByIdAndStatus(id, 0)
 				.orElseThrow(() -> new RescourceNotFoundException());;
 		
 		return BookConverter.toDto(entity);
 	}
 
+	// add book or update book
 	@Override
 	public BookDto saveOrUpdate(BookDto book, Long categoryId) {
 		BookEntity entity = new BookEntity();
-		BookEntity oldBook = bookRepository.findOneByNameAndAuthor(book.getName(), book.getAuthor());
+		BookEntity oldBook = bookRepository.findOneByNameAndAuthorAndStatus(book.getName(), book.getAuthor(),0);
 		
 		// thêm mới sách
 		if(book.getId() == null) {
@@ -97,22 +99,24 @@ public class BookService implements IBookService{
 		CategoryEntity category = categoryRepository.findById(CategoryId)
 				.orElseThrow(() -> new RescourceNotFoundException());
 		entity.setCategory(category);
-		
+		entity.setStatus(0);
+		entity.setSold_quantity(0);
 		return entity;
 	}
 	
 	// cập nhật quyển sách đã có
 	private BookEntity update(BookDto book) {
 		// lấy quyển sách trong database theo id
-		BookEntity oldBook = bookRepository.findById(book.getId())
+		BookEntity oldBook = bookRepository.findOneByIdAndStatus(book.getId(), 0)
 				.orElseThrow(() -> new RescourceNotFoundException());
 		BookEntity newBook = BookConverter.toEntity(oldBook, book);
 		return newBook; 
 	}
 
+	// get all book by category
 	@Override
 	public List<BookDto> findnAllByCategory(Long categoryId) {
-		List<BookEntity> entities = bookRepository.findAllByCategory_Id(categoryId);
+		List<BookEntity> entities = bookRepository.findAllByCategory_IdAndStatus(categoryId, 0);
 		List<BookDto> listResult = new ArrayList<>();
 		for(BookEntity entity : entities) {
 			listResult.add(BookConverter.toDto(entity));
@@ -130,16 +134,16 @@ public class BookService implements IBookService{
 		return pathStr;
 	}
 
+	// delete book
 	@Override
 	public void delete(Long id) {
 		List<ReviewEntity> reviews = reviewRepository.findAllByBook_Id(id);
 		for(ReviewEntity review : reviews) {
 			reviewRepository.deleteById(review.getId());
 		}
-		// update status of table book = 1
+		// update status of table book = 1 (đã xóa)
 		BookEntity book = bookRepository.findById(id)
 				.orElseThrow(() -> new RescourceNotFoundException());
-		
 		book.setStatus(1);
 		bookRepository.save(book);
 	}
