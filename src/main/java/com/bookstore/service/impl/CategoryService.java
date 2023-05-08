@@ -21,8 +21,9 @@ public class CategoryService implements ICategoryService{
 	private CategoryRepository categoryRepository;
 	
 	@Override
-	public List<CategoryDto> findAll() {
-		List<CategoryEntity> listEntity = categoryRepository.findAll();
+	public List<CategoryDto> findAll(String key) {
+//		List<CategoryEntity> listEntity = categoryRepository.findAll();
+		List<CategoryEntity> listEntity = categoryRepository.searchByName(key);
 		List<CategoryDto> results = new ArrayList<>();
 		for(CategoryEntity entity : listEntity) {
 			results.add(CategoryConverter.toDto(entity));

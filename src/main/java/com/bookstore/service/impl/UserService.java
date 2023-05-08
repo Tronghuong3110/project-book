@@ -82,10 +82,9 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public List<UserDto> findAll() {
-//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//		Collection<? extends GrantedAuthority> roles = authentication.getAuthorities();
-		List<UserEntity> entities = userRepository.findAll();
+	public List<UserDto> findAll(String key) {
+//		List<UserEntity> entities = userRepository.findAll();
+		List<UserEntity> entities = userRepository.searchUserByKeyword(key);
 		List<UserDto> results = new ArrayList<>();
 		for(UserEntity entity : entities) {
 			results.add(UserConverter.toDto(entity));

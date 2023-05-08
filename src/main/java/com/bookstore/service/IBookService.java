@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.bookstore.model.dto.BookDto;
 
 public interface IBookService {
-	List<BookDto> findAll();
+	List<BookDto> searchBookByNameOrAuthor(String key);
 	List<BookDto> findnAllByCategory(Long categoryId);
 	BookDto findOne(Long id);
 	BookDto saveOrUpdate(BookDto book, Long categoryId);

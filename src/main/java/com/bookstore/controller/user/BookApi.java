@@ -2,8 +2,10 @@ package com.bookstore.controller.user;
 
 import java.util.List;
 
+import com.bookstore.model.dto.CategoryDto;
 import com.bookstore.model.dto.ReviewDto;
 import com.bookstore.model.response.ResponseReview;
+import com.bookstore.service.ICategoryService;
 import com.bookstore.service.IReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,10 +26,13 @@ public class BookApi {
 	@Autowired
 	private IReviewService reviewService;
 
+	@Autowired
+	private ICategoryService categoryService;
+
 	// get all book in database
 	@GetMapping("/books")
-	public List<BookDto> getAllBook() {
-		List<BookDto> res = bookService.findAll();
+	public List<BookDto> getAllBook(@RequestParam String key) {
+		List<BookDto> res = bookService.searchBookByNameOrAuthor(key);
 		return res;
 	}
 
@@ -67,5 +72,10 @@ public class BookApi {
 	public ResponseEntity<?> delete(@PathVariable("id") String id) {
 		String message = reviewService.delete(Long.valueOf(id));
 		return ResponseEntity.ok(message);
+	}
+
+	@GetMapping("/categories")
+	public List<CategoryDto> getAllCategory(@RequestParam String key) {
+		return categoryService.findAll(key);
 	}
  }

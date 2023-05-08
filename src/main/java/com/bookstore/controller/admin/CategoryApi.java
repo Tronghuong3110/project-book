@@ -17,9 +17,9 @@ public class CategoryApi {
 	@Autowired
 	private ICategoryService categoryService;
 	
-	@GetMapping("/category")
-	public List<CategoryDto> findAll() {
-		List<CategoryDto> results = categoryService.findAll();
+	@GetMapping("/categories")
+	public List<CategoryDto> findAll(@RequestParam String key) {
+		List<CategoryDto> results = categoryService.findAll(key);
 		return results;
 	}
 	
@@ -29,7 +29,7 @@ public class CategoryApi {
 		return category;
 	}
 	
-	@PostMapping("/admin/category")
+	@PostMapping("/category")
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public CategoryDto save(@RequestBody CategoryDto category) {
 		CategoryDto dto = categoryService.saveOrUpdate(category);

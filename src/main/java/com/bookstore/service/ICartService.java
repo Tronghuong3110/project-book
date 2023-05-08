@@ -4,5 +4,5 @@ import com.bookstore.model.dto.CartItemDto;
 
 public interface ICartService {
     CartItemDto save(Long bookId, CartItemDto cartItem);
-    void deleteCartItem(Long id);
+    String deleteCartItem(Long id);
 }

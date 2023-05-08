@@ -23,7 +23,7 @@ public class CartApi {
 
     @DeleteMapping("/cart/{cartItemId}")
     public ResponseEntity<?> deleteCartItem(@PathVariable("cartItemId") String cartItemId) {
-        cartService.deleteCartItem(Long.valueOf(cartItemId));
-        return ResponseEntity.ok("Xoa sản phẩm thành công");
+        String message = cartService.deleteCartItem(Long.valueOf(cartItemId));
+        return ResponseEntity.ok(message);
     }
 }

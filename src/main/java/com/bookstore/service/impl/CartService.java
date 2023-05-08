@@ -18,7 +18,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CartItemService implements ICartService {
+public class CartService implements ICartService {
 
     @Autowired
     private UserRepository userRepository;
@@ -70,13 +70,17 @@ public class CartItemService implements ICartService {
 
     // delete cartItem
     @Override
-    public void deleteCartItem(Long id) {
+    public String deleteCartItem(Long id) {
         // status = 0: trong gio hang
-        // status = 1: da xoa khoi gio hang (tu do)
-        // status = 2: da dc dat hang
-        CartItemEntity cartItemEntity = cartItemRepository.findByIdAndStatus(id, 0)
-                .orElseThrow(() -> new RescourceNotFoundException());
-        cartItemEntity.setStatus(1);
-        cartItemRepository.save(cartItemEntity);
+        // status = 1: da dc dat hang
+//        CartItemEntity cartItemEntity = cartItemRepository.findByIdAndStatus(id, 0)
+//                .orElseThrow(() -> new RescourceNotFoundException());
+//        cartItemEntity.setStatus(1);
+        if(cartItemRepository.existsById(id)) {
+            cartItemRepository.deleteById(id);
+            return "Xóa sản phầm thành công";
+        }
+        return "không tồn tại sản phẩm này trong giỏ hàng";
+
     }
 }

@@ -21,9 +21,9 @@ public class BookApi {
 	
 	// get all book in đatabase
 	@GetMapping("/book")
-	public List<BookDto> findAll() {
-		List<BookDto> results = bookService.findAll();
-		return results;
+	public List<BookDto> getAllBook(@RequestParam String key) {
+		List<BookDto> res = bookService.searchBookByNameOrAuthor(key);
+		return res;
 	}
 	
 	// get one book by id

@@ -8,5 +8,5 @@ import java.util.List;
 public interface IUserService {
 	String createUser(UserDto user);
 	ResponseLogin login(UserDto user);
-	List<UserDto> findAll();
+	List<UserDto> findAll(String key);
 }

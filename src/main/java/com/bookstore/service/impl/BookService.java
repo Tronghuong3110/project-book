@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bookstore.model.entity.CartItemEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -40,8 +41,9 @@ public class BookService implements IBookService{
 
 	// get all book in database
 	@Override
-	public List<BookDto> findAll() {
-		List<BookEntity> listEntity = bookRepository.findAllByStatus(0);
+	public List<BookDto> searchBookByNameOrAuthor(String key) {
+//		List<BookEntity> listEntity = bookRepository.findAllByStatus(0);
+		List<BookEntity> listEntity = bookRepository.searchBookByNameOrAuthor(key);
 		List<BookDto> results = new ArrayList<>();
 		for(BookEntity entity : listEntity) {
 			results.add(BookConverter.toDto(entity));
@@ -76,10 +78,10 @@ public class BookService implements IBookService{
 		else {
 			// TH không tìm được sách nào trùng tiêu đề và tác giả
 			// Hoặc có nhưng mà nó chính là quyển sách đang cần chỉnh sử
-			if(oldBook == null || (oldBook != null && oldBook.getId() == book.getId())) {
+			if(oldBook == null || (oldBook != null && oldBook.getId().equals(book.getId()))) {
 				entity = update(book);
 				// Th thay đổi cả thể loại của quyển sách 
-				if(categoryId != entity.getCategory().getId()) {
+				if(!categoryId.equals(entity.getCategory().getId())) {
 					CategoryEntity category = categoryRepository.findById(categoryId)
 							.orElseThrow(() -> new RescourceNotFoundException());
 					entity.setCategory(category);
@@ -137,10 +139,18 @@ public class BookService implements IBookService{
 	// delete book
 	@Override
 	public void delete(Long id) {
+		// xoa tất cả comment và đánh giá của quyển sách đó
 		List<ReviewEntity> reviews = reviewRepository.findAllByBook_Id(id);
 		for(ReviewEntity review : reviews) {
 			reviewRepository.deleteById(review.getId());
 		}
+
+		// xóa tất cả quyển sách có trong cartItem và trong giỏ hàng mà chưa được đặt
+		List<CartItemEntity> cartItemEntities = cartItemRepository.findAllByBook_IdAndStatus(id, 0);
+		for(CartItemEntity cartItemEntity : cartItemEntities) {
+			cartItemRepository.deleteById(cartItemEntity.getId());
+		}
+
 		// update status of table book = 1 (đã xóa)
 		BookEntity book = bookRepository.findById(id)
 				.orElseThrow(() -> new RescourceNotFoundException());
