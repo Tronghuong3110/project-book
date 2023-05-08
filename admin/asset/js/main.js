@@ -1,11 +1,17 @@
-var urlGetAllBook = "http://localhost:8081/admin/book";
-var urlDeleteBook = "http://localhost:8081/admin/book/"
+var urlBook = "http://localhost:8081/api/admin/book";
+const token = localStorage.getItem("token");
+console.log(token)
 $.ajax({
-    url: urlGetAllBook,
     type: "GET",
+    beforeSend: function(xhr) {
+        xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+        // console.log('Authorization Header: '+ 'Bearer ' + token);
+    },
+    url: urlBook + "?key",
     dataType: "JSON",
     success: function(response) {
         console.log(response)
+        localStorage.setItem("listBook", JSON.stringify(response));
         renderListBook(response)
     },
     error: function(xhr, status, error) {
@@ -15,43 +21,96 @@ $.ajax({
 
 // render list book
 function renderListBook(data) {
+    var html = '';
     $.each($(data), function(i, item) {
-        $(".js-render-list").append(`
+        html += `
             <tr>
                 <td class = "tdItem"> ${item.name}</td>
                 <td class = "tdItem"> ${item.author} </td>
                 <td class = "tdItem"> ${item.category.name} </td>
                 <td class = "tdItem"> <input type="date" name="date" value="${item.publication_date}" disabled style = "font-size: 2rem; text-align: center; background-color: #fff !important; border: none;"></td>
                 <td class = "tdItem"> ${item.total_page} </td>
-                <td class = "tdItem"> ${item.total_sold} </td>
+                <td class = "tdItem"> ${item.sold_quantity} </td>
                 <td class = "tdItem"> 
                     <a href="detail.html?id=${item.id}" data-history="replaceState"><button type="button" class="btn btn-success" class = "remove">View</button></a>
-                    <button type="button" class="btn btn-secondary" onclick = "deleteBook(${item.id}, ${item.name})" class = "remove test">Delete</button>
+                    <button type="button" class="btn btn-secondary" onclick = "deleteBook(${item.id})" class = "remove test">Delete</button>
                 </td>
             </tr>
 
-        `)
+        `
     })
+    $(".js-render-list").html(html)
 }
 
 
-// function deleteBook(id, name) {
-//     var check = confirm("Bạn có chắc muốn xóa quyển sách " + name +" không");
-//     if(check) {
-//         $.ajax({
-//             url: urlGetAllBook + id,
-//             type: "DELETE",
-//             success: function() {
-//                 alert("Xóa sách " + name + " thành công")
-//                 window.location.href = "index.html"
-//             },
-//             error: function(xhr, status, error) {
-//                 alert("Xóa sách " + name + " không thành công");
-//             }
-//         })
-//     }
-// }
+function deleteBook(id) {
+    var check = confirm("Bạn có chắc muốn xóa quyển sách không");
+    // console.log(id)
+    if(check) {
+        $.ajax({
+            url: urlBook + "/" + id,
+            beforeSend: function(xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+            // console.log('Authorization Header: '+ 'Bearer ' + token);
+            },
+            type: "DELETE",
+            success: function() {
+                alert("Xóa sách thành công")
+                var oldListBook = JSON.parse(localStorage.getItem("listBook"));
+                var newListBook = oldListBook.filter(item => item.id !== id);
+                localStorage.setItem("listBook", JSON.stringify(newListBook))
+                console.log(newListBook)
+                renderListBook(newListBook);
+                // console.log(oldListBook)
+            },
+            error: function(xhr, status, error) {
+                alert("Xóa sách không thành công");
+            }
+        })
+    }
+}
 
-$('.test').click(function() {
-    alert("hello")
-}) 
+// search book by title or author
+
+// filter
+$(".js-search").on("input", function(e) {
+    const key = $(this).val().trim();
+    filterBook(key);
+})
+// search back end
+$(".js-btn-search").click(function(e) {
+    const key = $(".js-search").val().toLowerCase().trim();
+    console.log(key)
+    searchByKey(key);
+})
+
+function searchByKey(key) {
+    $.ajax({
+        url: urlBook + "?key=" + key,
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+            // console.log('Authorization Header: '+ 'Bearer ' + token);
+        },
+        type: "GET",
+        dataType: "JSON",
+        success: function(response) {
+            localStorage.setItem("listBook", JSON.stringify(response))
+            console.log(response)
+            renderListBook(response);
+        },
+        error: function(xhr, status, error) {
+            alert("Tìm kiếm lỗi rồi!!");
+        }
+    })
+}
+
+function filterBook(key) {
+    const oldListBook = JSON.parse(localStorage.getItem("listBook"));
+    const listBookFilter = oldListBook.filter(book => {
+        return (
+            book.name.toLowerCase().includes(key.toLowerCase()) ||
+            book.author.toLowerCase().includes(key.toLowerCase())
+        ); 
+    })
+    renderListBook(listBookFilter);
+}

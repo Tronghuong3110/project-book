@@ -4,7 +4,7 @@
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<meta charset="utf-8" />
-	<title>Danh sách thể loại</title>
+	<title>Trang chủ</title>
 
 	<meta name="description" content="overview &amp; stats" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
@@ -142,7 +142,7 @@
 
 
 					<li class="">
-						<a href="/index.html" class="dropdown-toggle">
+						<a href="#" class="dropdown-toggle">
 							<i class="menu-icon fa fa-desktop"></i>
 							<span class="menu-text">
 								Danh sách
@@ -164,16 +164,19 @@
 							</li>
 
 							<li class="">
-								<a href="#" class="dropdown-toggle">
+								<a href="category.html">
 									<i class="menu-icon fa fa-caret-right"></i>
+
 									Danh sách thể loại
+									<!-- <b class="arrow fa fa-angle-down"></b> -->
 								</a>
 
 								<b class="arrow"></b>
+
 							</li>
 
 							<li class="">
-								<a href="user.html">
+								<a href="#">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Danh sách người dùng
 								</a>
@@ -218,7 +221,7 @@
 						<ul class="breadcrumb">
 							<li class="active" style="font-size: 2.5rem;">
 								<i class="ace-icon fa fa-home home-icon" style="font-size: 2.5rem;"></i>
-								<a href="./index.html">Home</a>
+								<a href="index.html">Home</a>
 							</li>
 						</ul><!-- /.breadcrumb -->
 
@@ -235,12 +238,10 @@
 
 					<!-- Begin body -->
 					<div class="page-content">
-						<div style="display: flex; margin-bottom: 10px; justify-content: flex-end;">
-							<!-- <button type="button" class="btn btn-success btn-addoredit" style="width: 200px; height: 54px ;font-size: 2.5rem;">Add category</button> -->
-							<button type="button" class="btn btn-success" onclick="openModalAdd()" data-toggle="modal"
-								data-target="#myModal" style="width: 200px; height: 54px ;font-size: 2.5rem;">Add
-								category</button>
-						</div>
+						<!-- <div style="display: flex; margin-bottom: 10px; justify-content: flex-end;">
+							<a href="detail.html?id=-1"><button type="button" class="btn btn-success btn-addoredit"
+									style="width: 200px; height: 54px ;font-size: 2.5rem;">Add book</button></a>
+						</div> -->
 						<!-- Table danh sách sách -->
 						<!-- begin body -->
 						<div class="row">
@@ -249,9 +250,11 @@
 									<table class="table table-bordered">
 										<thead>
 											<tr>
-												<th class="tdItem">ID</th>
-												<th class="tdItem">Tên thể loại</th>
-												<th class="tdItem">Mã thể loại</th>
+												<th class="tdItem">Id</th>
+												<th class="tdItem">Tên đăng nhập</th>
+												<th class="tdItem">Họ và tên</th>
+												<th class="tdItem">Email</th>
+												<th class="tdItem">Quyền</th>
 												<th class="tdItem">Thao tác</th>
 											</tr>
 										</thead>
@@ -299,42 +302,9 @@
 				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
 			</a>
 		</div><!-- /.main-container -->
-
-		<!-- Modal create category -->
-		<!-- Modal -->
-		<div class="modal fade" id="myModal" role="dialog">
-			<div class="modal-dialog">
-				<!-- Modal content-->
-				<div class="modal-content">
-					<!-- header of modal -->
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<div class="title-modal"></div>
-					</div>
-					<!-- Body of modal -->
-					<div class="modal-body">
-						<form class="form-category">
-							<label for="name" class="label-text js-text-header">Tên thể loại</label>
-							<input type="text" name="name" id="name" class="input-field"
-								placeholder="Tên thể loại (Tiểu thyết,...)" required>
-							<div class="clear"></div>
-							<label for="code" class="label-text">Mã thể loại</label>
-							<input type="text" id="code" name="code" class="input-field"
-								placeholder="Mã thể loại (tieu-thuyet,....)" required>
-							<div class="clear"></div>
-							<input type="hidden" name="id" id="id">
-							<button type="submit" class="btn btn-success btn-save"
-								style="width: 100%; height: 54px ;font-size: 2.5rem;">Save</button>
-						</form>
-					</div>
-					<!-- footer of modal -->
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					</div>
-				</div>
-			</div>
-		</div>
 	</div>
+
+	<!-- basic scripts -->
 
 	<!--[if !IE]> -->
 	<script src="./asset/assets/js/jquery.2.1.1.min.js"></script>
@@ -342,8 +312,8 @@
 	<!-- <![endif]-->
 
 	<!--[if IE]>
-		<script src="assets/js/jquery.1.11.1.min.js"></script>
-		<![endif]-->
+	<script src="assets/js/jquery.1.11.1.min.js"></script>
+	<![endif]-->
 
 	<!--[if !IE]> -->
 	<script type="text/javascript">
@@ -351,7 +321,7 @@
 	</script>
 
 	<!-- JS call api -->
-	<script src="./asset/js/category.js"></script>
+	<script src="./asset/js/user.js"></script>
 	<script src="./asset/js/authentication.js"></script>
 
 	<script type="text/javascript">

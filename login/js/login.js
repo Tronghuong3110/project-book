@@ -1,7 +1,8 @@
-var urlLogin = "http://localhost:8081/api/auth/login";
+const urlLogin = "http://localhost:8081/api/auth/login";
+const urlSignup = "http://localhost:8081/api/auth/signup"
 
 $(document).ready(function () {
-
+    // đăng nhập
     $(".login").submit(function (e) {
         e.preventDefault();
         var inforLogin = {};
@@ -11,20 +12,29 @@ $(document).ready(function () {
         login(inforLogin);
     })
 
-    $(function() {
-        var param = getParam();
-        if(param === "unauthorized") {
-            // không có quyền truy cập
-        }
-        else if (param === '') {
-            // chưa đăng nhập
+    // đăng ký tài khoản
+    $(".signup").submit(function (e) {
+        e.preventDefault();
+        var inforSignup = {};
+        $(".signup input").each(function () {
+            inforSignup[$(this).attr("name")] = $(this).val();
+        })
+        var passwordConfirm = $("#passwordAgain").val();
+        var password = $("#password").val();
+        var checkPassword = check(password, passwordConfirm);
+        if(checkPassword) {
+            registerUser(inforSignup);
         }
         else {
-            
+            var alertMess = $(".js-alert");
+            alertMess.css("display", "block");
+            alertMess.text("Xác nhận mật khẩu không đúng!")
         }
+        // login(inforSignup);
     })
 })
 
+// đăng nhập
 function login(infor) {
     $.ajax({
         url: urlLogin,
@@ -42,25 +52,52 @@ function login(infor) {
             localStorage.setItem("fullName", response.fullName);
             if(response.roles[0].authority === "USER") {
                 console.log(response);
-                window.location.href = "/admin/index.html";
-                alert("user đăng nhập thành công")
+                window.location.href = "/web/index.html";
+                // alert("user đăng nhập thành công")
+                console.log(token)
             }
             else {
-                // console.log(response.roles[0].authority);
+                console.log(token)
                 window.location.href = "/admin/index.html";
             }
         },
         error: function(xhr, status, error) {
             // Xử lý lỗi nếu có
-            // alert("Tài Khoản hoặc mật khẩu không đúng, vui lòng thử lại")
             $(".alert").css("display", "block");
             console.log(xhr.responseText);
         }
     })
 }
 
-// get param from url
-function getParam() {
-    var urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get('message');
+// đăng ký tài khoản
+function registerUser(infor) {
+    $.ajax({
+        url: urlSignup,
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(infor),
+        datatype: "JSON",
+        success: function(response) {
+            const mess = response.message
+            var alertMess = $(".js-alert");
+            if(mess === "User register successfully!") {
+                alert("Đăng ký tài khoản thành công!")
+                window.location.href = "/login/login.html"
+            }
+            else {
+                alertMess.css("display", "block");
+                alertMess.text(mess);
+            }
+        },
+        error: function(xhr, status, error) {
+            // Xử lý lỗi nếu có
+            $(".js-alert").css("display", "none");
+            console.log(xhr.responseText);
+        }
+    })
+}
+
+//confirm password
+function check(password, confirmPassword) {
+    return password===confirmPassword;
 }

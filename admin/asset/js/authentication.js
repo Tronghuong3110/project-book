@@ -7,7 +7,7 @@ $(function() {
     else {
         const fullName = localStorage.getItem("fullName");
         const role = localStorage.getItem("role");
-        console.log(role)
+        // console.log(role)
         if(role != "ADMIN") {
             $(".remove").css("display", "none");
             $(".no-skin").html(`

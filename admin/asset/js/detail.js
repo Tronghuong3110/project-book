@@ -1,5 +1,5 @@
-var urlGetOneBook = "http://localhost:8081/admin/book/";
-var urlGetAllCategory = "http://localhost:8081/admin/category";
+var urlGetOneBook = "http://localhost:8081/api/admin/book/";
+var urlGetAllCategory = "http://localhost:8081/api/admin/category";
 
 // get id book from param
 function getProductIdFromUrl() {
@@ -8,10 +8,15 @@ function getProductIdFromUrl() {
 }
 var idBook = getProductIdFromUrl();
 // console.log(idBook)
+const token = localStorage.getItem("token");
 if(idBook != -1) {
     $.ajax({
         url: urlGetOneBook + idBook,
         type: "GET",
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+            // console.log('Authorization Header: '+ 'Bearer ' + token);
+        },
         dataType: "JSON",
         success: function(response) {
             console.log(response)
@@ -29,6 +34,7 @@ else {
     var obj = {};
     obj["category"] = {}
     $(".js-infor-book").append(setValue(obj))
+    $("#category").html('<option value="null">---Thể loại sách---</option>')
     $(".js-infor-book input").each(function() {
         // reset value of input
         $(this).val('');
@@ -51,7 +57,7 @@ function setValue(data) {
             <div class="row space-bottom">
                 <!-- Tiêu đề -->
                 <div class="col-md-4">
-                    <label class="control-label font-label" for="name">Tiêu đề</label> <br>
+                    <label class="control-label font-label" for="name">Tiêu đề</label><br>
                     <input type="text" name="name" id="name" class="form-contr-mol input-field" value = "${data.name}" required disabled>
                 </div>
                 <!-- Tác giả -->
@@ -72,7 +78,7 @@ function setValue(data) {
                 <!-- Ngày phát hành -->
                 <div class="col-md-4">
                     <label class="control-label font-label" for="publication_date">Ngày phát hành</label> <br>
-                    <input type="date" name="publication_date" id="publication_date" class="form-contr-mol input-field" value = "${data.date_publication}" required disabled>
+                    <input type="date" name="publication_date" id="publication_date" class="form-contr-mol input-field" value = "${data.publication_date}" required disabled>
                 </div>
                 <!-- Số trang -->
                 <div class="col-md-4">
@@ -92,14 +98,13 @@ function setValue(data) {
         <!-- right -->
         <div class="col-lg-4 js-file" style="display: flex; flex-flow: column; align-items: center; margin-top: 22px;">
             <form id="form-upload">
-                <label for="image">Hình ảnh</label>
-                <input type="file" class="form-control-file" name="image" id="img" disabled>
+                <label for="img">Hình ảnh</label>
+                <input type="file" class="form-control-file" name="image" id="img" value="${data.image} disabled>
             </form>
             <div class="image" style="margin-top: 12px;">
-                <img src="http://localhost:8081/image/${data.image}" alt="" style="object-fit: cover; height: 333px;">
+                <img class="image" src="http://localhost:8081/api/file/${data.image}" alt="" style="object-fit: cover; height: 300px;">
             </div>
             <input type="hidden" id="imageHidden" name="oldImage" value="${data.image}">
-            <input type="hidden" id="id" value="${data.id}" name="id">
         </div>    
     `
 }
@@ -109,10 +114,14 @@ function getAllCategory() {
     $.ajax({
         url: urlGetAllCategory,
         type: "GET",
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+            // console.log('Authorization Header: '+ 'Bearer ' + token);
+        },
         dataType: "JSON",
         success: function(response) {
             console.log(response)
-            $(".js-categories").html(renderCategories(response))
+            renderCategories(response);
         },
         error: function(xhr, status, error) {
             alert("error get category")
@@ -122,13 +131,14 @@ function getAllCategory() {
 
 // render categories in select
 function renderCategories(data) {
-    var html = '';
+    var categoryId = $("#category").val();
     $.each($(data), function(i, item) {
-        html +=`
-            <option value="${item.id}">${item.name}</option>
-        `
+        if(item.id != categoryId) {
+            $(".js-categories").append(`
+                <option value="${item.id}">${item.name}</option>
+            `)
+        }
     })
-    return html;
 }
 
 // solve add and edit book
@@ -151,7 +161,7 @@ function uploadFile(obj) {
     var formData = new FormData();
     formData.append('image', $('#img')[0].files[0]);
     $.ajax({
-        url: 'http://localhost:8081/admin/file',
+        url: 'http://localhost:8081/api/file',
         type: 'POST',
         data: formData,
         contentType: false,
@@ -175,10 +185,15 @@ function uploadFile(obj) {
 function saveBook(obj) {
     var method = obj["id"] == '' ? "POST" : "PUT";
     console.log(method);
-    console.log(obj)
+    // console.log(obj)
+    console.log("Id thể loại: " + $("#category").val())
     $.ajax({
-        url: "http://localhost:8081/admin/book/" + $("#category").val(),
+        url: "http://localhost:8081/api/admin/book/" + $("#category").val(),
         method: method,
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+            // console.log('Authorization Header: '+ 'Bearer ' + token);
+        },
         data: JSON.stringify(obj),
         dataType: "JSON",
         contentType: "application/json; charset=UTF-8",
@@ -188,7 +203,7 @@ function saveBook(obj) {
             window.location.href = "index.html"
         },
         error: function(xhr, status, error) {
-            alert("Không thể thêm quyển sách này !!")
+            alert("Không thể thêm sách !!")
         }
     })
 }
@@ -220,12 +235,19 @@ $(".js-btn-save").click(function() {
 // save
 function save(imageValue) {
     var obj = getValueInputField();
-    if(imageValue != obj["image"] && obj["image"] != '') {
-        uploadFile(obj);
-        console.log(obj)
+    obj["id"] = idBook;
+    if(valiDateForm(obj)) {
+        if(imageValue != obj["image"] && obj["image"] != '') {
+            uploadFile(obj);
+            // console.log(obj)
+        }
+        else {
+            saveBook(obj);
+            console.log(obj)
+        }
     }
     else {
-        saveBook(obj);
+        alert("Vui lòng điền đầy đủ thông tin sách!")
     }
 }
 
@@ -238,11 +260,45 @@ $(".js-btn-add").click(function() {
     var check = confirm("Bạn có chắc muốn thêm quyển sách này không?")
     if(check) {
         var obj = getValueInputField();
-        uploadFile(obj)
-        // console.log(obj)
+        obj["id"] = '';
+        if(valiDateForm(obj)) {
+            var categoryId = $("#category").val();
+            console.log("categoryId = " + categoryId)
+            if(categoryId == 'null') {
+                alert("Vui lòng chọn thể loại sách!")
+            }
+            else {
+                uploadFile(obj)
+                // alert("ok")
+            }
+        }
+        else {
+            alert("Vui lòng điền đầy đủ thông tin của sách!")
+        }
     }
 })
 
 // ====================================== End add book ===============================================================
 
 
+// hiển thị ảnh tạm thời khi chọn ảnh
+$(document).ready(function() {
+    // get input
+    var input = $("#img");
+    var img = $(".image");
+    input.on("input", function() {
+        // alert("Đã thay ảnh")
+        var file = input[0].files[0];
+        const image = URL.createObjectURL(file);
+        img.attr("src", image);
+    })
+})
+
+// check các trường input có trống không
+function valiDateForm(obj) {
+    if(obj['author'] === '' || obj['name'] === '' ||
+        obj['publication_date'] === '') {
+            return false;
+    }
+    return true;
+}

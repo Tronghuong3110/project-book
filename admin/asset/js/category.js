@@ -1,11 +1,18 @@
-var urlCategory = "http://localhost:8081/admin/category"
-var urlGetOneById = "http://localhost:8081/admin/category/"
+var urlCategory = "http://localhost:8081/api/admin/categories"
+var urlOne = "http://localhost:8081/api/admin/category/"
 
+const token = localStorage.getItem("token");
+// find All
 $.ajax({
-    url: urlCategory,
+    url: urlCategory + "?key",
     type: "GET",
+    beforeSend: function(xhr) {
+        xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+        // console.log('Authorization Header: '+ 'Bearer ' + token);
+    },
     dataType: "JSON",
     success: function(response) {
+        localStorage.setItem("categories", JSON.stringify(response));
         htmlCategories(response)
         // console.log(response)
     },
@@ -16,8 +23,9 @@ $.ajax({
 
 // render table category
 function htmlCategories(data) {
+    var html = '';
     $.each($(data), function(i, item) {
-        $(".js-render-list").append(
+        html += 
             `
                 <tr>
                     <td class = "tdItem"> ${item.id}</td>
@@ -28,8 +36,8 @@ function htmlCategories(data) {
                     </td>
                 </tr>
             `
-        )
     })
+    $(".js-render-list").html(html);
 }
 
 // edit category
@@ -41,11 +49,15 @@ function openModalEdit(id) {
     // $(".form-category").submit(saveOrUpdate(id))
 }
 
-// set value of category to input
+// set value of category to input ---> find One by id
 function setValue(id) {
     $.ajax({
-        url: urlGetOneById + id,
+        url: urlOne + id,
         type: "GET",
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+            // console.log('Authorization Header: '+ 'Bearer ' + token);
+        },
         dataType: "JSON",
         success: function(response) {
             $("#name").val(response.name);
@@ -74,14 +86,19 @@ $(".form-category").submit(function(e) {
     saveOrUpdate(idCategory);
 })
 
+// add or update book
 function saveOrUpdate(id) {
     var method = (id === '') ? "POST" : "PUT";
     var obj = getValueInputField(id);
     var check = (id === '') ? confirm("Bạn có chắc muốn thêm thể loại sách này không?") : confirm("Bạn có chắc muốn chỉnh sửa quyển sách này không?")
     if(check) {
         $.ajax({
-            url: urlCategory,
+            url: urlOne,
             type: method,
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+                // console.log('Authorization Header: '+ 'Bearer ' + token);
+            },
             dataType: "JSON",
             contentType: "application/json",
             data: JSON.stringify((obj)),
@@ -106,4 +123,52 @@ function getValueInputField(id) {
     })
     obj["id"] = id;
     return obj;
+}
+
+
+// ========================================= search ===============================
+
+// search filter
+$(".js-search").on("input", function(e) {
+    const key = $(this).val().trim();
+    filterUser(key);
+})
+// search back end
+$(".js-btn-search").click(function(e) {
+    const key = $(".js-search").val().toLowerCase().trim();
+    console.log(key)
+    searchByKey(key);
+})
+
+
+function searchByKey(key) {
+    $.ajax({
+        url: urlCategory + "?key=" + key,
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+            // console.log('Authorization Header: '+ 'Bearer ' + token);
+        },
+        type: "GET",
+        dataType: "JSON",
+        success: function(response) {
+            localStorage.setItem("categories", JSON.stringify(response))
+            console.log(response)
+            htmlCategories(response);
+        },
+        error: function(xhr, status, error) {
+            alert("Tìm kiếm lỗi rồi!!");
+        }
+    })
+}
+
+function filterUser(key) {
+    console.log(key)
+    const oldListCategory = JSON.parse(localStorage.getItem("categories"));
+    const listCategoryFilter = oldListCategory.filter(category => {
+        return (
+            category.name.toLowerCase().includes(key.toLowerCase()) ||
+            category.code.toLowerCase().includes(key.toLowerCase())
+        ); 
+    })
+    htmlCategories(listCategoryFilter);
 }
