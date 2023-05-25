@@ -1,5 +1,5 @@
 var urlGetOneBook = "http://localhost:8081/api/admin/book/";
-var urlGetAllCategory = "http://localhost:8081/api/admin/category";
+var urlGetAllCategory = "http://localhost:8081/api/admin/categories";
 
 // get id book from param
 function getProductIdFromUrl() {
@@ -9,6 +9,7 @@ function getProductIdFromUrl() {
 var idBook = getProductIdFromUrl();
 // console.log(idBook)
 const token = localStorage.getItem("token");
+console.log(token)
 if(idBook != -1) {
     $.ajax({
         url: urlGetOneBook + idBook,
@@ -22,6 +23,7 @@ if(idBook != -1) {
             console.log(response)
             // setValue(response)
             $(".js-infor-book").append(setValue(response))
+            $("#decription").text(response.decription)
             // renderCategories(response)
         },
         error: function(xhr, status, error) {
@@ -70,7 +72,7 @@ function setValue(data) {
             <!-- Mô tả -->
             <div class="row space-bottom" style="padding: 0 12px;">
                 <label class="control-label font-label" for="decription">Mô tả về cuốn sách</label> <br>
-                <textarea class="form-control" id="decription" name="decription" rows="8" cols="30" value = "${data.decription}" disabled></textarea>
+                <textarea class="form-control" id="decription" name="decription" rows="8" cols="30" disabled></textarea>
             </div>
 
             <!-- Ngày phát hành & số trang -->
@@ -99,7 +101,7 @@ function setValue(data) {
         <div class="col-lg-4 js-file" style="display: flex; flex-flow: column; align-items: center; margin-top: 22px;">
             <form id="form-upload">
                 <label for="img">Hình ảnh</label>
-                <input type="file" class="form-control-file" name="image" id="img" value="${data.image} disabled>
+                <input type="file" class="form-control-file" name="image" id="img" value="${data.image}" disabled>
             </form>
             <div class="image" style="margin-top: 12px;">
                 <img class="image" src="http://localhost:8081/api/file/${data.image}" alt="" style="object-fit: cover; height: 300px;">
@@ -112,7 +114,7 @@ function setValue(data) {
 // get all category
 function getAllCategory() {
     $.ajax({
-        url: urlGetAllCategory,
+        url: urlGetAllCategory + "?key",
         type: "GET",
         beforeSend: function(xhr) {
             xhr.setRequestHeader('Authorization', 'Bearer ' + token);
@@ -151,15 +153,16 @@ function getValueInputField() {
     $(".js-infor-book input").each(function() {
         obj[$(this).attr("name")] = $(this).val();
     })
-    obj[$("#dicription").attr("name")] = $("#dicription").val();
+    obj[$("#decription").attr("name")] = $("#decription").val();
     obj["id"] = $("#id").val();
     return obj;
 }
 
 // upload file save image book to server 
 function uploadFile(obj) {
-    var formData = new FormData();
+    var formData = new FormData(); // C://....
     formData.append('image', $('#img')[0].files[0]);
+    console.log("Upload file: " + obj)
     $.ajax({
         url: 'http://localhost:8081/api/file',
         type: 'POST',
@@ -171,7 +174,6 @@ function uploadFile(obj) {
             // Xử lý kết quả trả về từ server
             obj["image"] = response;
             saveBook(obj)
-            // console.log("Tên ảnh: " + response)
         },
         error: function(xhr, status, error) {
             // Xử lý lỗi nếu có
@@ -239,7 +241,8 @@ function save(imageValue) {
     if(valiDateForm(obj)) {
         if(imageValue != obj["image"] && obj["image"] != '') {
             uploadFile(obj);
-            // console.log(obj)
+            // console.log("Anh khac" + obj)
+            console.log(obj)
         }
         else {
             saveBook(obj);

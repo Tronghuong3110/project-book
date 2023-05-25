@@ -168,12 +168,16 @@
 // })(jQuery);
 
 
-
+const urlApiAddBookToCart = "http://localhost:8081/api/user/cart/";
 const url = "http://localhost:8081/api/user/books";
 const urlCategory = "http://localhost:8081/api/user/categories";
 const token = localStorage.getItem("token");
+const fullName = localStorage.getItem("fullName");
 if(!token) {
 	window.location.href = "/login/login.html";
+}
+else {
+	$(".user-name").text(fullName);
 }
 function start() {
 	$.ajax({
@@ -203,32 +207,27 @@ function render(data) {
 			`
 				<div class="col-lg-3 mb-5">
 					<div class="product product-display">
-						<div class="product-img">
-							<img src="http://localhost:8081/api/file/${item.image}" alt="Ảnh sản phẩm thử ${i + 1}" style="object-fit: cover; height: 300px;">
-							<div class="product-label">
-								<span class="sale">-30%</span>
-								<span class="new">NEW</span>
+						<a href="./detail-product.html?id=${item.id}">
+							<div class="product-img">
+									<img src="http://localhost:8081/api/file/${item.image}" alt="Ảnh sản phẩm thử ${i + 1}" style="object-fit: cover; height: 300px;">
 							</div>
-						</div>
-						<div class="product-body">
-							<p class="product-category" style="font-weight: 500; font-size: 1rem; color: #000;">${item.category.name}</p>
-							<h3 class="product-name"><a href="#">${item.name}</a></h3>
-							<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-							<div class="product-rating">
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
+						</a>
+						<a href="./detail-product.html?id=${item.id}">
+							<div class="product-body">
+								<p class="product-category" style="font-weight: 500; font-size: 1rem; color: #000;">${item.category.name}</p>
+								<h3 class="product-name"><a href="#">${item.name}</a></h3>
+								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+								<div class="product-rating">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+								</div>
 							</div>
-							<div class="product-btns">
-								<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-								<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-								<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-							</div>
-						</div>
+						</a>
 						<div class="add-to-cart add-to-cart-new">
-							<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+							<button class="add-to-cart-btn" onclick="addProductToCart(${item.id}, 1)"><i class="fa fa-shopping-cart"></i> add to cart</button>
 						</div>
 					</div>
 				</div>
@@ -294,9 +293,10 @@ function renderBookByCategory(categoryId) {
 			alert("Get book by category error!")
 		}
 	})
-	console.log(parseJwt(token).sub)
+	// console.log(parseJwt(token).sub)
 }
 
+// gett user name
 function parseJwt(token) {
     if (!token) { 
         return;
@@ -304,4 +304,38 @@ function parseJwt(token) {
     const base64Url = token.split('.')[1];
     const base64 = base64Url.replace('-', '+').replace('_', '/');
     return JSON.parse(window.atob(base64));
+}
+
+// add book to cart
+function addProductToCart(idBook, quantity) {
+    var obj = {};
+    if(quantity === undefined) {
+        obj["quantity"] = $(".quantity").val();
+    }
+    else {
+        obj['quantity'] = quantity;
+    }
+    callAPiAdd(obj, idBook)
+}
+
+function callAPiAdd(obj, idBook) {
+    $.ajax({
+        type: "POST",
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+        },
+        url: urlApiAddBookToCart + idBook,
+        data: JSON.stringify(obj),
+        dataType: "JSON",
+		contentType: "application/json; charset=UTF-8",
+        success: function (response) {
+            console.log(response);
+			alert("Thêm thành công!")
+        },
+        error: function(xhr, status, message) {
+			alert("Thêm sản phẩm lỗi!")
+            console.log(message.message);
+        }
+    });
+    // console.log(obj)
 }

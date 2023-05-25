@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+		<title>Electro - HTML Ecommerce Template</title>
+
+ 		<!-- Google font -->
+ 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+        <link rel="stylesheet" href="./asset/css/font-awesome.min.css">
+        <link type="text/css" rel="stylesheet" href="./asset/css/style.css"/>
+        <link type="text/css" rel="stylesheet" href="./asset/css/nouislider.min.css"/>
+        <link type="text/css" rel="stylesheet" href="./asset/css/slick-theme.css"/>
+        <link type="text/css" rel="stylesheet" href="./asset/css/slick.css"/>
+        <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+		<style>
+			.font-size-12 {
+				font-size: 1.2rem !important;
+			}
+		</style>
+    </head>
+	<body>
+		<!-- HEADER -->
+		<header>
+			<!-- MAIN HEADER -->
+			<div id="header">
+				<!-- container -->
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<!-- LOGO -->
+						<div class="col-md-3">
+							<div class="header-logo">
+								<a href="#" class="logo">
+									<!-- <img src="./img/logo.png" alt=""> -->
+									<img src="./asset/img/logo.png" alt="">
+								</a>
+							</div>
+						</div>
+						<!-- /LOGO -->
+
+						<!-- SEARCH BAR -->
+						<div class="col-md-4">
+							<div class="header-search">
+								<form>
+									<input class="input" placeholder="Search here" style="height: 50px; width: 71%; border-radius: 40px 0px 0px 40px;">
+									<button class="search-btn" style="height: 50px;">Search</button>
+								</form>
+							</div>
+						</div>
+						<!-- /SEARCH BAR -->
+
+						<!-- ACCOUNT -->
+						<div class="col-md-5 clearfix">
+							<div class="header-ctn">
+								<!-- Cart -->
+								<div class="dropdown" style="color: #fff;">
+									<a class="" data-toggle="dropdown" aria-expanded="true">
+										<i class="fa fa-shopping-cart" style="font-size: 2.2rem;"></i>
+										<div class="qty">3</div>
+									</a>
+								</div>
+								<div class="top-panel-right" style="color: #fff; font-size: 1.2rem; display: flex; align-items: center;">
+									<div class="admin hidden-xs" style="display: flex;">
+										<div style="width: max-content;float: left; margin-right: 2px;">
+											<span class="text">Chào:</span>
+											<span class="user-name"></span>
+										</div>
+										<div class="" style="background-color: #fff; width: 2px; height: 30px; margin: 0px 3px;"></div>
+										<div class="logout js-btn-logout" href="#" style="color: #fff; text-decoration: none;">Đăng xuất</div>
+									</div>
+								</div> 
+								<!-- <button class="btn js-btn-logout" style="color: #fff;">logout</button> -->
+								<!-- /Cart -->
+							</div>
+						</div>
+						<!-- /ACCOUNT -->
+					</div>
+					<!-- row -->
+				</div>
+				<!-- container -->
+			</div>
+			<!-- /MAIN HEADER -->
+		</header>
+		<div id="breadcrumb" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<ul class="breadcrumb-tree">
+							<li><a href="./index.html">Home</a></li>
+							<li class="js-name-category">Tên thể loại sản phẩm</li>
+							<li class="active js-name-product">Tên sản sách đang xem</li>
+						</ul>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /BREADCRUMB -->
+
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<!-- Product main img -->
+					<div class="col-md-5 col-md-push-2">
+						<div id="product-main-img">
+							<div class="product-preview">
+								<img src="" alt="Ảnh demo" id="image-book">
+							</div>
+						</div>
+					</div>
+					<!-- /Product main img -->
+					
+					<!-- Product details -->
+					<div class="col-md-5 js-detail-product">
+						<!-- Render infor of product -->
+					</div>
+					<!-- /Product details -->
+
+					<!-- Product tab -->
+					<div class="col-md-12">
+						<div id="product-tab">
+							<!-- product tab nav -->
+							<ul class="tab-nav">
+								<li class="active"><a data-toggle="tab" href="#tab1">Mô tả</a></li>
+								<li><a data-toggle="tab" href="#tab2">Thông tin chi tiết</a></li>
+								<li><a data-toggle="tab" href="#tab3">Đánh giá (3)</a></li>
+							</ul>
+							<!-- /product tab nav -->
+
+							<!-- product tab content -->
+							<div class="tab-content">
+								<!-- tab1 decription -->
+								<div id="tab1" class="tab-pane js-decription active">
+
+								</div>
+								<!-- /tab1  -->
+
+								<!-- tab2  infor book-->
+								<div id="tab2" class="tab-pane">
+									<div class="row">
+										<div class="col-md-12 col-xs-12">
+											<div class="table-responsive">
+												<table class="table table-bordered">
+													<!-- <thead>
+														<tr>
+															<th class="">Tiêu đề</th>
+															<th class="">Tác giả</th>
+															<th class="">Thể loại</th>
+															<th class="">Ngày phát hành</th>
+															<th class="">Số trang</th>
+														</tr>
+													</thead> -->
+													<tbody class="js-inforBook">
+														
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- /tab2  -->
+
+								<!-- tab3  -->
+								<div id="tab3" class="tab-pane">
+									<div class="row">
+										<!-- Rating -->
+										<div class="col-md-3">
+											<div id="rating">
+												<div class="rating-avg">
+													<span>4.5</span>
+													<div class="rating-stars">
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star-o"></i>
+													</div>
+												</div>
+												</ul>
+											</div>
+										</div>
+										<!-- /Rating -->
+
+										<!-- Reviews -->
+										<div class="col-md-6">
+											<div id="reviews" style="overflow-y: scroll;" data-spy="scroll" data-target="#navbar-example3" data-offset="0">
+												<div>
+													<div class="review-heading">
+														<h5 class="name">John</h5>
+														<p class="date">27 DEC 2018, 8:0 PM</p>
+														<div class="review-rating">
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star-o empty"></i>
+														</div>
+													</div>
+													<div class="review-body">
+														<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+													</div>
+												</div>
+												<div>
+													<div class="review-heading">
+														<h5 class="name">John</h5>
+														<p class="date">27 DEC 2018, 8:0 PM</p>
+														<div class="review-rating">
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star-o empty"></i>
+														</div>
+													</div>
+													<div class="review-body">
+														<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+													</div>
+												</div>
+												<div>
+													<div class="review-heading">
+														<h5 class="name">John</h5>
+														<p class="date">27 DEC 2018, 8:0 PM</p>
+														<div class="review-rating">
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star-o empty"></i>
+														</div>
+													</div>
+													<div class="review-body">
+														<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- /Reviews -->
+
+										<!-- Review Form -->
+										<div class="col-md-3">
+											<div id="review-form">
+												<form class="review-form">
+													<input class="input" type="text" placeholder="Your Name">
+													<input class="input" type="email" placeholder="Your Email">
+													<textarea class="input" placeholder="Your Review"></textarea>
+													<div class="input-rating">
+														<span>Your Rating: </span>
+														<div class="stars">
+															<input id="star5" name="rating" value="5" type="radio"><label for="star5"></label>
+															<input id="star4" name="rating" value="4" type="radio"><label for="star4"></label>
+															<input id="star3" name="rating" value="3" type="radio"><label for="star3"></label>
+															<input id="star2" name="rating" value="2" type="radio"><label for="star2"></label>
+															<input id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
+														</div>
+													</div>
+													<button class="primary-btn">Submit</button>
+												</form>
+											</div>
+										</div>
+										<!-- /Review Form -->
+									</div>
+								</div>
+								<!-- /tab3  -->
+							</div>
+							<!-- /product tab content  -->
+						</div>
+					</div>
+					<!-- /product tab -->
+					
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+
+		<!-- Section Relative product-->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row js-render-relative-product">
+
+					<div class="col-md-12">
+						<div class="section-title text-center">
+							<h3 class="title">Sản phẩm liên quan</h3>
+						</div>
+					</div>
+
+					<!-- product -->
+					<!-- <div class="row"> -->
+					<div id="myCarousel" class="carousel slide col-md-12" data-ride="carousel">
+							<!-- Wrapper for carousel items -->
+							<div class="carousel-inner js-relative-product">
+								<!-- render -->
+								
+							</div>
+
+							<a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev"
+																style="transform: translateX(-62%);">
+								<i class="fa fa-angle-left" style="font-size: 35px; color: #000;"></i>
+							</a>
+							<a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next"
+																style="transform: translateX(48%);">
+								<i class="fa fa-angle-right" style="font-size: 35px; color: #000;"></i>
+							</a>
+						<!-- </div> -->
+					</div>
+					<!-- </div> -->
+
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /Section -->
+
+		<!-- FOOTER -->
+		<footer id="footer">
+			<!-- top footer -->
+			<div class="section">
+				<!-- container -->
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">About Us</h3>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
+								<ul class="footer-links">
+									<li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
+									<li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
+									<li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">Categories</h3>
+								<ul class="footer-links">
+									<li><a href="#">Hot deals</a></li>
+									<li><a href="#">Laptops</a></li>
+									<li><a href="#">Smartphones</a></li>
+									<li><a href="#">Cameras</a></li>
+									<li><a href="#">Accessories</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="clearfix visible-xs"></div>
+
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">Information</h3>
+								<ul class="footer-links">
+									<li><a href="#">About Us</a></li>
+									<li><a href="#">Contact Us</a></li>
+									<li><a href="#">Privacy Policy</a></li>
+									<li><a href="#">Orders and Returns</a></li>
+									<li><a href="#">Terms & Conditions</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">Service</h3>
+								<ul class="footer-links">
+									<li><a href="#">My Account</a></li>
+									<li><a href="#">View Cart</a></li>
+									<li><a href="#">Wishlist</a></li>
+									<li><a href="#">Track My Order</a></li>
+									<li><a href="#">Help</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- /row -->
+				</div>
+				<!-- /container -->
+			</div>
+			<!-- /top footer -->
+		</footer>
+		<!-- /FOOTER -->
+
+        <script src="./asset/js/jquery.min.js"></script>
+		<script src="./asset/js/bootstrap.min.js"></script>
+		<script src="./asset/js/slick.min.js"></script>
+		<script src="./asset/js/nouislider.min.js"></script>
+		<script src="./asset/js/jquery.zoom.min.js"></script>
+		<!-- <script src="./asset/js/main.js"></script> -->
+		<script src="./asset/js/detail.js"></script>
+		<script src="./asset/js/cart.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+	</body>
+</html>

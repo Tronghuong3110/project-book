@@ -494,8 +494,9 @@ textarea.input {
 \*----------------------------*/
 
 .header-ctn {
-  float: right;
+  /* float: right; */
   padding: 15px 0px;
+  display: flex;
 }
 
 .header-ctn>div {
@@ -2129,6 +2130,10 @@ textarea.input {
 .custom-dots .slick-dots {
   position: static;
   margin: 15px 0px;
+}
+
+.top-panel-right:hover {
+  cursor: pointer;
 }
 
 /*=========================================================
