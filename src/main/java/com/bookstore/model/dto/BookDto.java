@@ -14,6 +14,7 @@ public class BookDto {
 	private Integer total_page;
 	private String image;
 	private String decription;
+	private Float price;
 	private CategoryDto category;
 	private List<ReviewDto> reviews;
 	
@@ -82,5 +83,13 @@ public class BookDto {
 	}
 	public void setCategory(CategoryDto category) {
 		this.category = category;
+	}
+
+	public Float getPrice() {
+		return price;
+	}
+
+	public void setPrice(Float price) {
+		this.price = price;
 	}
 }

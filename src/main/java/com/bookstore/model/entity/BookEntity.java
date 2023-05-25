@@ -51,6 +51,9 @@ public class BookEntity {
 	@Column(name = "status")
 	private Integer status;
 
+	@Column(name = "price", columnDefinition = "float")
+	private Float price;
+
 	@OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
 	List<ReviewEntity> reviews = new ArrayList<>();
 	
@@ -160,5 +163,12 @@ public class BookEntity {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-	
+
+	public Float getPrice() {
+		return price;
+	}
+
+	public void setPrice(Float price) {
+		this.price = price;
+	}
 }

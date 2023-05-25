@@ -16,6 +16,7 @@ public class BookConverter {
 		dto.setTitle(entity.getTitle());
 		dto.setTotal_page(entity.getTotal_page());
 		dto.setImage(entity.getImage());
+		dto.setPrice(entity.getPrice());
 		dto.setCategory(CategoryConverter.toDto(entity.getCategory()));
 		return dto;
 	}
@@ -29,6 +30,7 @@ public class BookConverter {
 		entity.setSold_quantity(dto.getSold_quantity());
 		entity.setTitle(dto.getTitle());
 		entity.setImage(dto.getImage());
+		entity.setPrice(dto.getPrice());
 		entity.setTotal_page(dto.getTotal_page());
 		return entity;
 	}
@@ -48,6 +50,9 @@ public class BookConverter {
 		}
 		if(dto.getDecription() != null) {
 			book.setDecription(dto.getDecription());
+		}
+		if(!book.getImage().equals(dto.getImage()) && !dto.getImage().equals("")) {
+			book.setImage(dto.getImage());
 		}
 		return book;
 	}

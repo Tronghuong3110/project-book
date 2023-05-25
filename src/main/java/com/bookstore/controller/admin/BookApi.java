@@ -49,7 +49,8 @@ public class BookApi {
 		BookDto res = bookService.saveOrUpdate(book, Long.valueOf(categoryId));
 		return res;
 	}
-	
+
+	// Delete Book
 	@DeleteMapping("/book/{id}")
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public String deleteBook(@PathVariable("id") String id) {
