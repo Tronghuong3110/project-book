@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>Electro - HTML Ecommerce Template</title>
+		<!-- Google font -->
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+		<link rel="stylesheet" href="./asset/css/font-awesome.min.css">
+
+		<link type="text/css" rel="stylesheet" href="./asset/css/style.css"/>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+		<link rel="stylesheet" href="./asset/css/main.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> -->
+    <style>
+        .btn-delete:hover {
+            background-color: #000;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        ._8BP9GU {
+            width: 50px;
+            height: 32px;
+            border-left: 0;
+            border-right: 0;
+            font-size: 16px;
+            font-weight: 400;
+            box-sizing: border-box;
+            text-align: center;
+            cursor: text;
+            border-radius: 0;
+        }
+
+        .mJX7hG {
+            outline: none;
+            cursor: pointer;
+            border: 0;
+            font-size: .875rem;
+            font-weight: 300;
+            line-height: 1;
+            letter-spacing: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color .1s cubic-bezier(.4, 0, .6, 1);
+            border: 1px solid rgba(0, 0, 0, .09);
+            border-radius: 2px;
+            background: transparent;
+            color: rgba(0, 0, 0, .8);
+            width: 32px;
+            height: 32px;
+        }
+
+        .cart-quantity {
+            display: flex;
+            width: 11%;
+            align-items: center;
+        }
+
+        .input-cart-quantity {
+            display: flex;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header>
+        <!-- MAIN HEADER -->
+        <div id="header">
+            <!-- container -->
+            <div class="container container-with">
+                <!-- row -->
+                <div class="row">
+                    <!-- LOGO -->
+                    <div class="col-md-3">
+                        <div class="header-logo">
+                            <a href="#" class="logo">
+                                <!-- <img src="./img/logo.png" alt=""> -->
+                                <img src="./asset/img/logo.png" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <!-- /LOGO -->
+
+                    <!-- SEARCH BAR -->
+                    <div class="col-md-4">
+                        <div class="header-search">
+                            <form>
+                                <input class="input" placeholder="Search here"
+                                    style="height: 50px; width: 80%; border-radius: 40px 0px 0px 40px;">
+                                <button class="search-btn" style="height: 50px;">Search</button>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- /SEARCH BAR -->
+
+                    <!-- ACCOUNT -->
+                    <div class="col-md-5 clearfix center">
+                        <div class="header-ctn">
+                            <!-- Cart -->
+                            <div class="receipt" style="color: #fff;">
+                                <a href="#" style="text-decoration: none;" title="Giỏ hàng">
+                                    <i class="fa fa-shopping-cart" style="font-size: 2.2rem;"></i>
+                                    <div class="qty"></div> <!-- Tổng số sản phẩm trong giỏ hàng -->
+                                </a>
+                                <a href="#" style="text-decoration: none;" title="Đơn hàng của bạn">
+                                    <i class="fa-solid fa-receipt" style="font-size: 2.2rem;"></i>
+                                </a>
+                            </div>
+                            <div class="top-panel-right"
+                                style="color: #fff; font-size: 1.2rem; display: flex; align-items: center;">
+                                <div class="admin hidden-xs" style="display: flex;">
+                                    <div style="width: max-content;float: left; margin-right: 2px;">
+                                        <span class="text">Chào:</span>
+                                        <span class="user-name"></span>
+                                    </div>
+                                    <div class=""
+                                        style="background-color: #fff; width: 2px; height: 30px; margin: 0px 3px;">
+                                    </div>
+                                    <div class="logout js-btn-logout" href="#"
+                                        style="color: #fff; text-decoration: none;">Đăng xuất</div>
+                                </div>
+                            </div>
+                            <!-- <button class="btn js-btn-logout" style="color: #fff;">logout</button> -->
+                            <!-- /Cart -->
+                        </div>
+                    </div>
+                    <!-- /ACCOUNT -->
+                </div>
+                <!-- row -->
+            </div>
+            <!-- container -->
+        </div>
+        <!-- /MAIN HEADER -->
+    </header>
+    <!-- /HEADER -->
+
+    <!-- NAVIGATION -->
+    <div id="breadcrumb" class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumb-tree">
+                        <li><a href="./index.html">Trang chủ</a></li>
+                        <li class="active">Giỏ hàng</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /NAVIGATION -->
+
+    <!-- SECTION -->
+    <div class="section mb-2">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+
+                <!-- section title -->
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h3 class="title js-title">Giỏ hàng</h3>
+                    </div>
+                </div>
+                <!-- /section title -->
+
+                <!-- Products tab & slick -->
+                <div class="col-lg-12">
+                    <table class="table table-bordered table-condensed " style="margin-left: auto; margin-right: auto;">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Tác giả</th>
+                                <th>Tổng số trang</th>
+                                <th>Ngày xuất bản</th>
+                                <th>Đơn giá</th>
+                                <th>Số lượng</th>
+                                <th>Thành Tiền</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody class="js-render">
+                            
+                        </tbody>
+
+                    </table>
+                    <div class="row" style="display: flex; justify-content: end; padding: 0 15px;">
+                        <button class="btn btn-primary" style="margin-right: 6px;"><a href="./index.html"
+                                style="color: #fff;"><span class="icon-arrow-left"></span> Xem thêm sản phẩm</a>
+                        </button>
+                        <button class="btn btn-primary btn-payment js-btn-payment"><a href="./check-out.html" class="pull-right"
+                                style="color: #fff;">Thanh toán <span class="icon-arrow-right"></span></a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /SECTION -->
+
+    <!-- FOOTER -->
+    <footer id="footer">
+        <!-- top footer -->
+        <div class="section">
+            <!-- container -->
+            <div class="container">
+                <!-- row -->
+                <div class="row">
+                    <div class="col-md-3 col-xs-6">
+                        <div class="footer">
+                            <h3 class="footer-title">About Us</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                incididunt ut.</p>
+                            <ul class="footer-links">
+                                <li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
+                                <li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
+                                <li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-xs-6">
+                        <div class="footer">
+                            <h3 class="footer-title">Categories</h3>
+                            <ul class="footer-links">
+                                <li><a href="#">Hot deals</a></li>
+                                <li><a href="#">Laptops</a></li>
+                                <li><a href="#">Smartphones</a></li>
+                                <li><a href="#">Cameras</a></li>
+                                <li><a href="#">Accessories</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="clearfix visible-xs"></div>
+
+                    <div class="col-md-3 col-xs-6">
+                        <div class="footer">
+                            <h3 class="footer-title">Information</h3>
+                            <ul class="footer-links">
+                                <li><a href="#">About Us</a></li>
+                                <li><a href="#">Contact Us</a></li>
+                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="#">Orders and Returns</a></li>
+                                <li><a href="#">Terms & Conditions</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-xs-6">
+                        <div class="footer">
+                            <h3 class="footer-title">Service</h3>
+                            <ul class="footer-links">
+                                <li><a href="#">My Account</a></li>
+                                <li><a href="#">View Cart</a></li>
+                                <li><a href="#">Wishlist</a></li>
+                                <li><a href="#">Track My Order</a></li>
+                                <li><a href="#">Help</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /container -->
+        </div>
+        <!-- /top footer -->
+
+    </footer>
+    <!-- /FOOTER -->
+
+    <!-- jQuery Plugins -->
+    <script src="./asset/js/jquery.min.js"></script>
+    <script src="./asset/js/bootstrap.min.js"></script>
+    <!-- <script src="./asset/js/main.js"></script> -->
+    <script src="./asset/js/cart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

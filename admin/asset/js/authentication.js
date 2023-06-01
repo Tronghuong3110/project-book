@@ -2,7 +2,7 @@
 $(function() {
     var token = localStorage.getItem("token");
     if(!token) {
-        window.location.href = "/login/login.html?message"
+        window.location.href = "/login/login.html"
     }
     else {
         const fullName = localStorage.getItem("fullName");

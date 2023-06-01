@@ -4,51 +4,24 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 		<title>Electro - HTML Ecommerce Template</title>
 		<!-- Google font -->
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
-		<!-- Bootstrap -->
-
-		<!-- Slick -->
-		<!-- <link type="text/css" rel="stylesheet" href="css/slick.css"/> -->
-		<!-- <link type="text/css" rel="stylesheet" href="./asset/css/slick.css"/> -->
-
-		<!-- <link type="text/css" rel="stylesheet" href="css/slick-theme.css"/> -->
-		<!-- <link type="text/css" rel="stylesheet" href="./asset/css/slick-theme.css"/> -->
-
-		<!-- nouislider -->
-		<!-- <link type="text/css" rel="stylesheet" href="css/nouislider.min.css"/> -->
-		<!-- <link type="text/css" rel="stylesheet" href="./asset/css/nouislider.min.css"/> -->
-
-		<!-- Font Awesome Icon -->
-		<!-- <link rel="stylesheet" href="css/font-awesome.min.css"> -->
 		<link rel="stylesheet" href="./asset/css/font-awesome.min.css">
 
-		<!-- Custom stlylesheet -->
-		<!-- <link type="text/css" rel="stylesheet" href="css/style.css"/> -->
 		<link type="text/css" rel="stylesheet" href="./asset/css/style.css"/>
-
-		<!-- <link rel="stylesheet" href="/electro-master/css/indexNew.css"> -->
-		
-		<!-- <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/> -->
-		<!-- <link type="text/css" rel="stylesheet" href="./asset/css/bootstrap.min.css"/> -->
-
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"> -->
-
-		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		<!--[if lt IE 9]>
-		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
-
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+		<link rel="stylesheet" href="./asset/css/main.css">
+		<style>
+			a, 
+			a:hover {
+				text-decoration: none;
+			}
+		</style>
     </head>
 	<body>
 		<!-- HEADER -->
@@ -56,11 +29,11 @@
 			<!-- MAIN HEADER -->
 			<div id="header">
 				<!-- container -->
-				<div class="container">
+				<div class="container container-with">
 					<!-- row -->
 					<div class="row">
 						<!-- LOGO -->
-						<div class="col-md-3">
+						<div class="col-md-3 center">
 							<div class="header-logo">
 								<a href="#" class="logo">
 									<!-- <img src="./img/logo.png" alt=""> -->
@@ -74,7 +47,7 @@
 						<div class="col-md-4">
 							<div class="header-search">
 								<form>
-									<input class="input" placeholder="Search here" style="height: 50px; width: 71%; border-radius: 40px 0px 0px 40px;">
+									<input class="input" placeholder="Search here" style="height: 50px; width: 80%; border-radius: 40px 0px 0px 40px;">
 									<button class="search-btn" style="height: 50px;">Search</button>
 								</form>
 							</div>
@@ -82,13 +55,16 @@
 						<!-- /SEARCH BAR -->
 
 						<!-- ACCOUNT -->
-						<div class="col-md-5 clearfix">
+						<div class="col-md-5 clearfix center">
 							<div class="header-ctn">
 								<!-- Cart -->
-								<div class="dropdown" style="color: #fff;">
-									<a class="" data-toggle="dropdown" aria-expanded="true">
+								<div class="receipt" style="color: #fff;">
+									<a href="./cart.html" style="text-decoration: none;" title="Giỏ hàng">
 										<i class="fa fa-shopping-cart" style="font-size: 2.2rem;"></i>
-										<div class="qty">3</div>
+										<div class="qty"></div> <!-- Tổng số sản phẩm trong giỏ hàng -->
+									</a>
+									<a href="#" style="text-decoration: none;" title="Đơn hàng của bạn">
+										<i class="fa-solid fa-receipt" style="font-size: 2.2rem;"></i>
 									</a>
 								</div>
 								<div class="top-panel-right" style="color: #fff; font-size: 1.2rem; display: flex; align-items: center;">

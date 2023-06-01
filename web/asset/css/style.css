@@ -1477,7 +1477,7 @@ textarea.input {
 }
 
 .product-details .product-rating>i {
-  color: #E4E7ED;
+  color: #D10024;
 }
 
 .product-details .product-rating>i.fa-star {
@@ -1485,7 +1485,7 @@ textarea.input {
 }
 
 .product-details .review-link {
-  font-size: 12px;
+  font-size: 1.5rem;
 }
 
 .product-details .product-price {
@@ -1683,10 +1683,7 @@ textarea.input {
   display: inline-block;
 }
 
-.rating-avg .rating-stars>i, .rating .rating-stars>i {
-  color: #E4E7ED;
-}
-
+.rating-avg .rating-stars>i, .rating .rating-stars>i,
 .rating-avg .rating-stars>i.fa-star, .rating .rating-stars>i.fa-star {
   color: #D10024;
 }
@@ -1737,7 +1734,8 @@ textarea.input {
 }
 
 .reviews .review-body {
-  min-height: 70px;
+  position: relative;
+  min-height: 94px;
 }
 
 .reviews .review-heading .name {
@@ -1793,6 +1791,21 @@ textarea.input {
 
 .reviews-pagination li a {
   display: block;
+}
+
+/* Btn comment */
+.btn-comment {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.btn-comment > button{
+  border: none;
+  background-color: #fff;
+}
+.btn-comment > button:hover {
+  background-color: #ccc;
+  cursor: pointer;
 }
 
 /*-- Review Form --*/

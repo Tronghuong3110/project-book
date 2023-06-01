@@ -91,10 +91,17 @@ function setValue(data) {
 
             <!-- Thể loại -->
             <div class="row space-bottom" style="margin: 0;">
-                <label class="control-label font-label" for="category">Thể loại</label> <br>
-                <select id="category" name="category" class="form-control input-field js-categories" disabled>
-                    <option value="${data.category.id}">${data.category.name}</option>
-                </select> 
+                <div class="col-md-4">
+                    <label class="control-label font-label" for="category">Thể loại</label> <br>
+                    <select id="category" name="category" class="form-control input-field js-categories" disabled>
+                        <option value="${data.category.id}">${data.category.name}</option>
+                    </select> 
+                </div>
+                <!-- Số trang -->
+                <div class="col-md-4">
+                    <label class="control-label font-label" for="price">Giá</label> <br>
+                    <input type="number" name="price" id="price" class="form-contr-mol input-field" min="0" value = "${data.price}" required disabled>
+                </div>
             </div>
         </div>
         <!-- right -->

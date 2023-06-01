@@ -2,17 +2,19 @@
 const urlBook = "http://localhost:8081/api/user/book";
 const urlBookBycategory = "http://localhost:8081/api/user/books";
 const urlApiAddBookToCart = "http://localhost:8081/api/user/cart/";
-
 const bookId = getParam();
 const token = localStorage.getItem("token");
 const fullName = localStorage.getItem("fullName");
+
 if(!token) {
 	window.location.href = "/login/login.html";
 }
+
 else {
 	console.log(token)
 	$(".user-name").text(fullName);
 }
+
 $(".js-btn-logout").click(function (e) { 
 	e.preventDefault();
 	localStorage.clear();
@@ -37,33 +39,28 @@ function statr() {
             alert("error get book !!")
         }
 	});
+	setQuantity();
 }
+
 // detail product
 function render(data) {
 	$(".js-detail-product").append(
 		`
 		<div class="product-details" style = "font-size: 1.5rem;">
 			<h2 class="product-name">${data.name}</h2>
-			<div>
-				<div class="product-rating">
-					<i class="fa fa-star"></i>
-					<i class="fa fa-star"></i>
-					<i class="fa fa-star"></i>
-					<i class="fa fa-star"></i>
-					<i class="fa fa-star-o"></i>
-				</div>
-				<a class="review-link font-size-12" href="#">Tổng sổ review</a>
+			<div class="js-star">
+				
 			</div>
 			<div>
 				<h3 class="product-price"> ${data.price} đ</h3>
 			</div>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+			<p>${data.decription.substr(0, 100) + '...'}</p>
 		
 			<div class="add-to-cart">
 				<div class="qty-label">
 					Số lượng
 					<div class="input-number">
-						<input type="number" min="0" value="0" class = "quantity">
+						<input type="number" min="0" value="0" class = "quantity" disabled style = "font-size: 1.1rem;">
 						<span class="qty-up" onclick="quantityUp()">+</span>
 						<span class="qty-down" onclick="quantityDown()">-</span>
 					</div>
@@ -93,6 +90,26 @@ function render(data) {
 	// render inforBook
 	renderInforBook(data);
 	// render review Book
+	startReview(1);
+}
+
+function setQuantity() {
+	$.ajax({
+		url: "http://localhost:8081/api/user/cart/count",
+		method: "GET",
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader("Authorization", "Bearer "+ token);
+		},
+		dataType: "TEXT",
+		success: function(quantity) {
+			// console.log(quantity);
+			$(".qty").text(quantity);
+		},
+		error: function(xhr, status, message) {
+			alert("Đếm lỗi rồi!");
+			console.log(message.message);
+		}
+	})
 }
 
 // product relative
@@ -113,6 +130,7 @@ function productRelative(categoryId) {
 		}
 	})
 }
+
 // render san pham lien quan
 function renderRelativeProduct(data) {
 	var html = `
@@ -129,17 +147,11 @@ function renderRelativeProduct(data) {
 					<div class="product-body">
 						<p class="product-category">${item.category.name}</p>
 						<h3 class="product-name"><a href="#">${item.name}</a></h3>
+						<h3 class="product-name"><a href="#">${item.author}</a></h3>
 						<h4 class="product-price">${item.price} <del class="product-old-price">$990.00</del></h4>
-						<div class="product-rating">
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star-o"></i>
-						</div>
 					</div>
 					<div class="add-to-cart">
-						<button class="add-to-cart-btn" onclick="addProductToCart(${item.id}, 1)"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
+						<button class="add-to-cart-btn" onclick="addProductToCart(${item.id}, 1)"><i class="fa fa-shopping-cart"></i>ADD TO CART</button>
 					</div>
 				</div>
 			</div> `
@@ -197,12 +209,12 @@ function renderInforBook(inforProduct) {
 	`);
 }
 
-
 function quantityUp() {
 	var quantity = $(".quantity").val();
 	quantity ++;
 	$(".quantity").val(quantity);
 }
+
 function quantityDown() {
 	var quantity = $(".quantity").val();
 	if(quantity > 0) 
@@ -214,7 +226,6 @@ function getParam() {
 	var urlParams = new URLSearchParams(window.location.search);
     return urlParams.get('id');
 }
-
 
 // add book to cart
 function addProductToCart(idBook, quantity) {
@@ -240,7 +251,13 @@ function callAPiAdd(obj, idBook) {
 		contentType: "application/json; charset=UTF-8",
         success: function (response) {
             console.log(response);
-			alert("Thêm thành công!")
+			if(response === null) {
+				alert("Số lượng sản phẩm không hợp lệ!")
+			}
+			else {
+				alert("Thêm thành công!")
+				setQuantity();
+			}
         },
         error: function(xhr, status, message) {
 			alert("Thêm sản phẩm lỗi!")
@@ -248,4 +265,165 @@ function callAPiAdd(obj, idBook) {
         }
     });
     // console.log(obj)
+}
+
+function submitComment(idReview) {
+	// e.preventDefault();
+	// get value comment
+	var comment = $(".review-form .comment").val();
+	var star;
+	$(".review-form .input-rating .stars input").each(function() {
+		if($(this).is(":checked")) {
+			star = $(this).val();
+		}
+	});
+	const objReview = {star, comment};
+	if(idReview === undefined) addReview(objReview);
+	
+}
+
+function addReview(obj) {
+	$.ajax({
+		url: `http://localhost:8081/api/user/review?bookId=${bookId}`,
+		method: "POST",
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader("Authorization", "Bearer " + token);
+		},
+		data: JSON.stringify(obj),
+		dataType: "JSON",
+		contentType: "application/json; charset=UTF-8",
+		success: function(response) {
+			console.log(response);
+			startReview();
+			startReview(1);
+			resetFormComment();
+		},
+		error: function(xhr, status, message) {
+			alert("Bình luận lỗi rồi!");
+		}
+	})
+}
+
+function startReview(check) {
+	$.ajax({
+		url: `http://localhost:8081/api/user/reviews?bookId=${bookId}`,
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader("Authorization", "Bearer " + token);
+		},
+		method: "GET",
+		dataType: "JSON",
+		success: function(response) {
+			console.log(response);
+			if(check === undefined) {
+				renderReview(response);
+			}
+			else {
+				// <a class="review-link" href="#">10 Review(s) | Add your review</a>
+				$(".js-star").html(`
+					<div class="product-rating">
+						${renderStar(response.star)}
+					</div>
+					<a class="review-link" href="#">${response.totalReview} Đánh giá </a>
+				`)
+			}
+		},
+		error: function(xhr, status, message) {
+			alert("Get review lỗi rồi!");
+			console.log(message.message);
+		}
+	})
+}
+
+function renderReview(data) {
+	var htmlReview = '';
+	$.each($(data.reviews), function(i, item) {
+		htmlReview += `
+			<li>
+				<div class="review-heading">
+					<h5 class="name">${item.user.fullname}</h5>
+					<p class="date"> <input type="date" value=${item.createDate} disabled style="background-color: #fff; border: none; font-size: 1.1rem;" /> </p>
+					<div class="review-rating">
+						${renderStar(item.star)}
+					</div>
+				</div>
+				<div class="review-body">
+					<p>${item.comment}</p>
+					${renderBtnComment(item.user.fullname, item.id)}
+				</div>
+			</li>
+			<hr>
+		`;
+	})
+	var avgStar = data.star;
+	if(htmlReview == '') {
+		htmlReview = 'Không có đánh giá nào'
+		avgStar = 0;
+	}
+	$(".js-review-render").html(htmlReview);
+	$(".js-rating-avg").html(`
+		<span>${avgStar}</span>
+		<div class="rating-stars">
+			${renderStar(avgStar)}
+		</div>
+	`)
+}
+
+function renderStar(stars) {
+	var star = "";
+	var tmp = 0;
+	console.log("Total star = " + stars)
+	for(let i = 1; i <= stars; i++) {
+		star += `<i class="fa fa-star"></i>`
+		tmp = stars - i;
+	}
+	if(tmp > 0) star += `<i class="fa fa-star-half-full"></i>`;
+	for(let i = 1; i <= (5 - stars); i++) {
+		star += `<i class="fa fa-star-o"></i>`
+	}
+	return star;
+}
+
+function renderBtnComment(name, idReview) {
+	if(name === fullName) {
+		console.log(idReview);
+		return `
+			<div class="btn-comment">
+				<button type="button">Chỉnh sửa</button>
+				<button type="button" onclick="deleteComment(${idReview})">Xóa</button>
+			</div>
+		`
+	}
+	return '';
+}
+
+// delete review
+function deleteComment(idReview) {
+	var check = confirm("Bạn có chắc muốn xóa bình luận này không?");
+	if(check) {
+		$.ajax({
+			url: `http://localhost:8081/api/user/review/${idReview}`,
+			beforeSend: function(xhr) {
+				xhr.setRequestHeader("Authorization", "Bearer " + token);
+			},
+			type: "DELETE",
+			dataType: "TEXT",
+			success: function(message) {
+				alert("Xóa comment thành công!");
+				startReview();
+				startReview(1);
+			},
+			error: function(xhr, status, message) {
+				alert("Xóa comment lỗi rồi!");
+				console.log(message.message);
+			}
+		})
+	}
+}
+
+// reset form comment
+function resetFormComment() {
+	var comment = $(".review-form .comment").val("");
+	$(".review-form .input-rating .stars input").each(function() {
+		$(this).attr("checked", false);
+	});
 }

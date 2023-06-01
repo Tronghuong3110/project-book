@@ -196,6 +196,7 @@ function start() {
 			alert("Get all book error!")
 		}
 	});
+	setQuantity();
 }
 start();
 
@@ -215,15 +216,9 @@ function render(data) {
 						<a href="./detail-product.html?id=${item.id}">
 							<div class="product-body">
 								<p class="product-category" style="font-weight: 500; font-size: 1rem; color: #000;">${item.category.name}</p>
-								<h3 class="product-name"><a href="#">${item.name}</a></h3>
+								<h3 class="product-name">${item.name}</h3>
+								<h3 class="product-name">${item.author}</h3>
 								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								<div class="product-rating">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-								</div>
 							</div>
 						</a>
 						<div class="add-to-cart add-to-cart-new">
@@ -253,7 +248,6 @@ $.ajax({
 	url: urlCategory + "?key",
 	dataType: "JSON",
 	success: function (response) {
-		console.log(response);
 		renderCategory(response);
 	},
 	error: function(xhr, status, error) {
@@ -331,6 +325,7 @@ function callAPiAdd(obj, idBook) {
         success: function (response) {
             console.log(response);
 			alert("Thêm thành công!")
+			setQuantity();
         },
         error: function(xhr, status, message) {
 			alert("Thêm sản phẩm lỗi!")
@@ -339,3 +334,24 @@ function callAPiAdd(obj, idBook) {
     });
     // console.log(obj)
 }
+
+
+function setQuantity() {
+	$.ajax({
+		url: "http://localhost:8081/api/user/cart/count",
+		method: "GET",
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader("Authorization", "Bearer "+ token);
+		},
+		dataType: "TEXT",
+		success: function(quantity) {
+			// console.log(quantity);
+			$(".qty").text(quantity);
+		},
+		error: function(xhr, status, message) {
+			alert("Đếm lỗi rồi!");
+			console.log(message.message);
+		}
+	})
+}
+

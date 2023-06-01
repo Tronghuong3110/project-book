@@ -1,0 +1,17 @@
+.container-with {
+    max-width: 1600px;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+.receipt {
+    display: flex !important;
+}
+
+.fa-star-o {
+    color: #E4E7ED !important;
+}
+
