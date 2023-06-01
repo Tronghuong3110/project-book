@@ -21,7 +21,7 @@ public class ReviewEntity {
 	@Column(name = "id", columnDefinition = "bigint")
 	private Long id;
 	
-	@Column(name = "comment", columnDefinition = "text")
+	@Column(name = "comment", columnDefinition = "ntext")
 	private String comment;
 	
 	@Column(name = "star")

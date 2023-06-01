@@ -29,9 +29,6 @@ public class CartEntity {
 	@OneToMany(mappedBy = "cart")
 	private List<CartItemEntity> cartItems = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "cart")
-	private List<BillEntity> bills = new ArrayList<>();
-	
 	public Long getId() {
 		return id;
 	}
@@ -52,13 +49,4 @@ public class CartEntity {
 		this.cartItems = cartItems;
 	}
 
-	public List<BillEntity> getBills() {
-		return bills;
-	}
-
-	public void setBills(List<BillEntity> bills) {
-		this.bills = bills;
-	}
-	
-	
 }

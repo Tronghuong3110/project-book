@@ -69,7 +69,7 @@ public class ReviewService implements IReviewService {
         responseReview.setTotalReview((long)count);
         responseReview.setReviews(results);
         // solve star
-        System.out.println(star / entities.size());
+        System.out.println(star / count);
         star = (double)Math.round((star / count * 10)) / 10;
         responseReview.setStar(star);
         return responseReview;
@@ -88,6 +88,7 @@ public class ReviewService implements IReviewService {
                 .orElseThrow(() -> new RescourceNotFoundException());
         UserEntity userEntity = reviewEntity.getUser();
         String ownerReview = userEntity.getUserName();
+
         if(!newUserName.equals(ownerReview)) {
             System.out.println(newUserName);
             System.out.println(ownerReview);

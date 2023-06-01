@@ -54,6 +54,9 @@ public class BookConverter {
 		if(!book.getImage().equals(dto.getImage()) && !dto.getImage().equals("")) {
 			book.setImage(dto.getImage());
 		}
+		if(book.getPrice() != null) {
+			book.setPrice(dto.getPrice());
+		}
 		return book;
 	}
 	

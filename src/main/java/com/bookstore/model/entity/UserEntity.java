@@ -45,7 +45,10 @@ public class UserEntity {
 			inverseJoinColumns = @JoinColumn(name = "role_id")
 	)
 	List<RoleEntity> roles = new ArrayList<>();
-	
+
+	@OneToMany(mappedBy = "userEntity", fetch = FetchType.LAZY)
+	private List<BillEntity> billEntityList = new ArrayList<>();
+
 	@OneToOne(mappedBy = "user")
 	private CartEntity cart;
 	
@@ -111,5 +114,12 @@ public class UserEntity {
 	public void setReviews(List<ReviewEntity> reviews) {
 		this.reviews = reviews;
 	}
-	
+
+	public List<BillEntity> getBillEntityList() {
+		return billEntityList;
+	}
+
+	public void setBillEntityList(List<BillEntity> billEntityList) {
+		this.billEntityList = billEntityList;
+	}
 }

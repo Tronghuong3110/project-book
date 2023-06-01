@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.*;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -25,5 +26,17 @@ public class CartApi {
     public ResponseEntity<?> deleteCartItem(@PathVariable("cartItemId") String cartItemId) {
         String message = cartService.deleteCartItem(Long.valueOf(cartItemId));
         return ResponseEntity.ok(message);
+    }
+
+    @GetMapping("/cart/cartItems/{status}")
+    public ResponseEntity<?> getListCartItem(@PathVariable("status") String status) {
+        List<CartItemDto> results = cartService.getListCartItem(Integer.valueOf(status));
+        return ResponseEntity.ok(results);
+    }
+
+    @GetMapping("/cart/count")
+    public Long countCartItem() {
+        Long count = cartService.countCartItem();
+        return count;
     }
 }

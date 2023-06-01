@@ -2,15 +2,8 @@ package com.bookstore.model.entity;
 
 import java.sql.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.*;
 
 @Entity
 @Table(name = "bill")
@@ -26,13 +19,22 @@ public class BillEntity {
 	
 	@Column(name = "code", length = 26)
 	private String code;
-	
-	@ManyToOne
-	@JoinColumn(name = "cart_id")
-	private CartEntity cart;
+
+	@Column(name = "total_price")
+	private Float totalPrice;
 	
 	@OneToOne(mappedBy = "bill")
-	private BillDetailEntity billDetail;
+	private Recipient_addressEntity billDetail;
+
+	@OneToMany(mappedBy = "billEntity")
+	private List<CartItemEntity> listCartItemEntity = new ArrayList<>();
+
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private UserEntity userEntity;
+
+	public BillEntity() {
+	}
 
 	public Date getCreateDate() {
 		return createDate;
@@ -54,12 +56,27 @@ public class BillEntity {
 		return id;
 	}
 
-	public CartEntity getCart() {
-		return cart;
+	public List<CartItemEntity> getListCartItemEntity() {
+		return listCartItemEntity;
 	}
 
-	public void setCart(CartEntity cart) {
-		this.cart = cart;
+	public void setListCartItemEntity(List<CartItemEntity> listCartItemEntity) {
+		this.listCartItemEntity = listCartItemEntity;
 	}
-	
+
+	public Float getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(Float totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	public UserEntity getUserEntity() {
+		return userEntity;
+	}
+
+	public void setUserEntity(UserEntity userEntity) {
+		this.userEntity = userEntity;
+	}
 }

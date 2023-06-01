@@ -10,8 +10,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "bill_detail")
-public class BillDetailEntity {
+@Table(name = "recipient_address")
+public class Recipient_addressEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,6 +35,9 @@ public class BillDetailEntity {
 	
 	@Column(name = "phone_receiver", length = 12)
 	private String phoneReceiver;
+
+	@Column(name = "note_bill", columnDefinition = "nText")
+	private String noteBill;
 	
 	@OneToOne
 	@JoinColumn(name = "bill_id")
@@ -99,5 +102,12 @@ public class BillDetailEntity {
 	public Long getId() {
 		return id;
 	}
-	
+
+	public String getNoteBill() {
+		return noteBill;
+	}
+
+	public void setNoteBill(String noteBill) {
+		this.noteBill = noteBill;
+	}
 }

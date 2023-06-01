@@ -34,6 +34,10 @@ public class CartItemEntity {
 	@ManyToOne
 	@JoinColumn(name = "cart_id")
 	private CartEntity cart;
+
+	@ManyToOne
+	@JoinColumn(name = "bill_id")
+	private BillEntity billEntity;
 	
 	public Integer getQuantity() {
 		return quantity;
@@ -70,5 +74,13 @@ public class CartItemEntity {
 
 	public void setTotalPrice(Double totalPrice) {
 		this.totalPrice = totalPrice;
+	}
+
+	public BillEntity getBillEntity() {
+		return billEntity;
+	}
+
+	public void setBillEntity(BillEntity billEntity) {
+		this.billEntity = billEntity;
 	}
 }

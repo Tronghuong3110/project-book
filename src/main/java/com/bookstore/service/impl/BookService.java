@@ -112,6 +112,15 @@ public class BookService implements IBookService{
 		BookEntity oldBook = bookRepository.findOneByIdAndStatus(book.getId(), 0)
 				.orElseThrow(() -> new RescourceNotFoundException());
 		BookEntity newBook = BookConverter.toEntity(oldBook, book);
+
+		// find all cart item by bookId
+		if(!oldBook.getPrice().equals(book.getPrice())) {
+			List<CartItemEntity> listCartItem = cartItemRepository.findAllByBook_IdAndStatus(oldBook.getId(), 0);
+			for(CartItemEntity entity : listCartItem) {
+				entity.setTotalPrice(entity.getQuantity() * (double)book.getPrice());
+				cartItemRepository.save(entity);
+			}
+		}
 		return newBook; 
 	}
 

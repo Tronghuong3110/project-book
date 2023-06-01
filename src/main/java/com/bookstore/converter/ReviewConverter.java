@@ -12,8 +12,8 @@ public class ReviewConverter {
 		dto.setId(entity.getId());
 		dto.setComment(entity.getComment());
 		dto.setStar(entity.getStar());
-		dto.setCreateDate(entity.getCreateDate());
-		dto.setModifiedDate(entity.getModifiedDate());
+		dto.setCreateDate(new java.sql.Date(entity.getCreateDate().getTime()));
+		dto.setModifiedDate(entity.getModifiedDate() != null ? new java.sql.Date(entity.getModifiedDate().getTime()): null);
 		dto.setUser(toUserDto(entity.getUser()));
 		return dto;
 	}
@@ -26,7 +26,12 @@ public class ReviewConverter {
 	}
 
 	private static UserDto toUserDto(UserEntity userEntity) {
-		return UserConverter.toDto(userEntity);
+		UserDto userDto = UserConverter.toDto(userEntity);
+		userDto.setRoles(null);
+		userDto.setId(null);
+		userDto.setEmail(null);
+		userDto.setUserName(null);
+		return userDto;
 	}
 
 }

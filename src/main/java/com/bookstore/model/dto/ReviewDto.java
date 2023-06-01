@@ -1,6 +1,6 @@
 package com.bookstore.model.dto;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class ReviewDto {
 	
