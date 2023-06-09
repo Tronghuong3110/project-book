@@ -39,6 +39,9 @@ public class BookConverter {
 		if(dto.getAuthor() != null) {
 			book.setAuthor(dto.getAuthor());
 		}
+		if(dto.getName() != null) {
+			book.setName(dto.getName());
+		}
 		if(dto.getPublication_date() != null) {
 			book.setPublication_date(dto.getPublication_date());
 		}

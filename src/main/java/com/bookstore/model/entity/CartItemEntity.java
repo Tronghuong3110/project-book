@@ -37,7 +37,7 @@ public class CartItemEntity {
 
 	@ManyToOne
 	@JoinColumn(name = "bill_id")
-	private BillEntity billEntity;
+	private BillEntity bill;
 	
 	public Integer getQuantity() {
 		return quantity;
@@ -76,11 +76,11 @@ public class CartItemEntity {
 		this.totalPrice = totalPrice;
 	}
 
-	public BillEntity getBillEntity() {
-		return billEntity;
+	public BillEntity getBill() {
+		return bill;
 	}
 
-	public void setBillEntity(BillEntity billEntity) {
-		this.billEntity = billEntity;
+	public void setBill(BillEntity bill) {
+		this.bill = bill;
 	}
 }

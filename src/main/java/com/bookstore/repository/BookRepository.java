@@ -19,9 +19,11 @@ public interface BookRepository extends JpaRepository<BookEntity, Long>{
 
 	// search book by name or author
 //	@Query(value = "select * from book where name like %:keyword% or author like %:keyword% and status = 0", nativeQuery = true)
-	@Query(value = "select * from book where (name like %:keyword% "
-					+ "or author like %:keyword%) "
+	@Query(value = "select * from book where (name COLLATE Latin1_General_CI_AI like %:keyword% "
+					+ "or author COLLATE Latin1_General_CI_AI like %:keyword%) "
 					+ "and status = 0",
 					   nativeQuery = true)
 	List<BookEntity> searchBookByNameOrAuthor(@Param("keyword") String keyword);
+
+	Boolean existsByIdAndStatus(Long id, Integer status);
 }

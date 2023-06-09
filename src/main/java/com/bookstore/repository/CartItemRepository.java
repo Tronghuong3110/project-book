@@ -16,6 +16,10 @@ public interface CartItemRepository extends JpaRepository<CartItemEntity, Long>{
 	Optional<CartItemEntity> findByIdAndStatus(Long id, Integer status);
 	List<CartItemEntity> findAllByBook_IdAndStatus(Long bookId, Integer status);
 	List<CartItemEntity> findAllByCart_IdAndStatus(Long cartId, Integer status);
+	List<CartItemEntity> findAllByBill_IdAndStatus(Long billId, Integer status);
+
 	@Query(value = "select count(id) from cart_item where cart_id = :cartId and status = :status group by(cart_id)", nativeQuery = true)
 	Long countByCart_IdAAndStatus(@Param("cartId") Long cartId, @Param("status") Integer status);
+
+	void deleteAllByBill_Id(Long id);
 }

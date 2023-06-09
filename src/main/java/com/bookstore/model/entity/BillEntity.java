@@ -26,12 +26,12 @@ public class BillEntity {
 	@OneToOne(mappedBy = "bill")
 	private Recipient_addressEntity billDetail;
 
-	@OneToMany(mappedBy = "billEntity")
+	@OneToMany(mappedBy = "bill")
 	private List<CartItemEntity> listCartItemEntity = new ArrayList<>();
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	private UserEntity userEntity;
+	private UserEntity user;
 
 	public BillEntity() {
 	}
@@ -72,11 +72,11 @@ public class BillEntity {
 		this.totalPrice = totalPrice;
 	}
 
-	public UserEntity getUserEntity() {
-		return userEntity;
+	public UserEntity getUser() {
+		return user;
 	}
 
-	public void setUserEntity(UserEntity userEntity) {
-		this.userEntity = userEntity;
+	public void setUser(UserEntity user) {
+		this.user = user;
 	}
 }

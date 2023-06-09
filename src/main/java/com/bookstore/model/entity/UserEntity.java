@@ -46,7 +46,7 @@ public class UserEntity {
 	)
 	List<RoleEntity> roles = new ArrayList<>();
 
-	@OneToMany(mappedBy = "userEntity", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<BillEntity> billEntityList = new ArrayList<>();
 
 	@OneToOne(mappedBy = "user")

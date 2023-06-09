@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bookstore.model.entity.CartItemEntity;
+import com.bookstore.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,7 +43,6 @@ public class BookService implements IBookService{
 	// get all book in database
 	@Override
 	public List<BookDto> searchBookByNameOrAuthor(String key) {
-//		List<BookEntity> listEntity = bookRepository.findAllByStatus(0);
 		List<BookEntity> listEntity = bookRepository.searchBookByNameOrAuthor(key);
 		List<BookDto> results = new ArrayList<>();
 		for(BookEntity entity : listEntity) {
@@ -54,15 +54,15 @@ public class BookService implements IBookService{
 	@Override
 	public BookDto findOne(Long id) {
 		BookEntity entity = bookRepository.findOneByIdAndStatus(id, 0)
-				.orElseThrow(() -> new RescourceNotFoundException());;
-		
+				.orElse(null);
+		if(entity == null) return new BookDto();
 		return BookConverter.toDto(entity);
 	}
 
 	// add book or update book
 	@Override
 	public BookDto saveOrUpdate(BookDto book, Long categoryId) {
-		BookEntity entity = new BookEntity();
+		BookEntity entity;
 		BookEntity oldBook = bookRepository.findOneByNameAndAuthorAndStatus(book.getName(), book.getAuthor(),0);
 		
 		// thêm mới sách
@@ -166,5 +166,4 @@ public class BookService implements IBookService{
 		book.setStatus(1);
 		bookRepository.save(book);
 	}
-
 }

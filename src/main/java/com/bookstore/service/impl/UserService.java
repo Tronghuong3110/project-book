@@ -1,7 +1,8 @@
 package com.bookstore.service.impl;
 
+import java.nio.charset.CharsetDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -54,6 +55,9 @@ public class UserService implements IUserService {
 		}
 		if(userRepository.existsByEmail(user.getEmail())) {
 			return "Email đã tồn tại, vui lòng thử lại!";
+		}
+		if(user.getUserName().trim().contains(" ")) {
+			return "UserName không hợp lệ!";
 		}
 		List<RoleEntity> roles = new ArrayList<>();
 		UserEntity userEntity = UserConverter.toEntity(user);
