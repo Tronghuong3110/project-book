@@ -1,5 +1,5 @@
 const urlGetAllUser = "http://localhost:8081/api/admin/users"
-const token = localStorage.getItem("token");
+const token = sessionStorage.getItem("token");
 $.ajax({
     type: "GET",
     beforeSend: function(xhr) {

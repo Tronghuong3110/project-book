@@ -1,7 +1,7 @@
 var urlCategory = "http://localhost:8081/api/admin/categories"
 var urlOne = "http://localhost:8081/api/admin/category/"
 
-const token = localStorage.getItem("token");
+const token = sessionStorage.getItem("token");
 // find All
 $.ajax({
     url: urlCategory + "?key",

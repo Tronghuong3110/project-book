@@ -3,8 +3,8 @@ const urlBook = "http://localhost:8081/api/user/book";
 const urlBookBycategory = "http://localhost:8081/api/user/books";
 const urlApiAddBookToCart = "http://localhost:8081/api/user/cart/";
 const bookId = getParam();
-const token = localStorage.getItem("token");
-const fullName = localStorage.getItem("fullName");
+const token = sessionStorage.getItem("token");
+const fullName = sessionStorage.getItem("fullName");
 
 if(!token) {
 	window.location.href = "/login/login.html";
@@ -17,7 +17,7 @@ else {
 
 $(".js-btn-logout").click(function (e) { 
 	e.preventDefault();
-	localStorage.clear();
+	sessionStorage.clear();
 	window.location.href = '/login/login.html';
 });
 statr();
@@ -33,7 +33,12 @@ function statr() {
 		dataType: "JSON",
 		success: function (response) {
 			console.log(response);
-			render(response);
+			if(response.id == null) {
+				alert("Quyển sách này không còn trên hệ thống!");
+				window.location.href = "./index.html";
+			}
+			else
+				render(response);
 		},
 		error: function(xhr, status, error) {
             alert("error get book !!")
@@ -67,14 +72,6 @@ function render(data) {
 				</div>
 				<button class="add-to-cart-btn" onclick="addProductToCart(${data.id})"><i class="fa fa-shopping-cart"></i> add to cart</button>
 			</div>
-		
-			<ul class="product-links">
-				<li class = "font-size-12">Share:</li>
-				<li class = "font-size-12"><a href="#"><i class="fa fa-facebook"></i></a></li>
-				<li class = "font-size-12"><i class="fa fa-twitter"></i></a></li>
-				<li class = "font-size-12"><i class="fa fa-google-plus"></i></a></li>
-				<li class = "font-size-12"><i class="fa fa-envelope"></i></a></li>
-			</ul>
 		</div>
 		`
 	);
@@ -140,18 +137,22 @@ function renderRelativeProduct(data) {
 	$.each($(data), function(i, item) {
 		html += `
 			<div class="col-lg-3 mb-5">
-				<div class="product">
-					<div class="product-img">
-						<img src="http://localhost:8081/api/file/${item.image}" alt="" style = "object-fit: cover; height: 377px;">
-					</div>
-					<div class="product-body">
-						<p class="product-category">${item.category.name}</p>
-						<h3 class="product-name"><a href="#">${item.name}</a></h3>
-						<h3 class="product-name"><a href="#">${item.author}</a></h3>
-						<h4 class="product-price">${item.price} <del class="product-old-price">$990.00</del></h4>
-					</div>
-					<div class="add-to-cart">
-						<button class="add-to-cart-btn" onclick="addProductToCart(${item.id}, 1)"><i class="fa fa-shopping-cart"></i>ADD TO CART</button>
+				<div class="product product-display">
+					<a href="./detail-product.html?id=${item.id}">
+						<div class="product-img">
+								<img src="http://localhost:8081/api/file/${item.image}" alt="Ảnh sản phẩm thử ${i + 1}" style="object-fit: cover; height: 300px;">
+						</div>
+					</a>
+					<a href="./detail-product.html?id=${item.id}">
+						<div class="product-body">
+							<p class="product-category" style="font-weight: 500; font-size: 1rem; color: #000;">${item.category.name}</p>
+							<h3 class="product-name">${item.name}</h3>
+							<h3 class="product-name">${item.author}</h3>
+							<h4 class="product-price">${item.price} đ <del class="product-old-price">990 đ</del></h4>
+						</div>
+					</a>
+					<div class="add-to-cart add-to-cart-new">
+						<button class="add-to-cart-btn" onclick="addProductToCart(${item.id}, 1)"><i class="fa fa-shopping-cart"></i> add to cart</button>
 					</div>
 				</div>
 			</div> `
@@ -388,7 +389,6 @@ function renderBtnComment(name, idReview) {
 		console.log(idReview);
 		return `
 			<div class="btn-comment">
-				<button type="button">Chỉnh sửa</button>
 				<button type="button" onclick="deleteComment(${idReview})">Xóa</button>
 			</div>
 		`
@@ -427,3 +427,8 @@ function resetFormComment() {
 		$(this).attr("checked", false);
 	});
 }
+
+//search
+$('.search').submit(function(e) {
+	e.preventDefault();
+})

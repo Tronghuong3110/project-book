@@ -1,12 +1,12 @@
 
 $(function() {
-    var token = localStorage.getItem("token");
+    var token = sessionStorage.getItem("token");
     if(!token) {
         window.location.href = "/login/login.html"
     }
     else {
-        const fullName = localStorage.getItem("fullName");
-        const role = localStorage.getItem("role");
+        const fullName = sessionStorage.getItem("fullName");
+        const role = sessionStorage.getItem("role");
         // console.log(role)
         if(role != "ADMIN") {
             $(".remove").css("display", "none");
@@ -36,7 +36,7 @@ function parseJwt(token) {
 
 $(document).ready(function() {
     $(".logout").click(function() {
-        localStorage.clear();
+        sessionStorage.clear();
         window.location.href = "/login/login.html";
     })
 })

@@ -16,6 +16,13 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 		<link rel="stylesheet" href="./asset/css/main.css">
+
+
+		<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"> -->
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
 		<style>
 			.font-size-12 {
 				font-size: 1.2rem !important;
@@ -40,7 +47,7 @@
 							<div class="header-logo">
 								<a href="#" class="logo">
 									<!-- <img src="./img/logo.png" alt=""> -->
-									<img src="./asset/img/logo.png" alt="">
+									<img src="./asset/img/anhlogo.png" style="object-fit: cover; height: 80px;" alt="Ảnh logo">
 								</a>
 							</div>
 						</div>
@@ -49,7 +56,7 @@
 						<!-- SEARCH BAR -->
 						<div class="col-md-4">
 							<div class="header-search">
-								<form>
+								<form class="form-search search">
 									<input class="input" placeholder="Search here" style="height: 50px; width: 80%; border-radius: 40px 0px 0px 40px;">
 									<button class="search-btn" style="height: 50px;">Search</button>
 								</form>
@@ -66,7 +73,7 @@
 										<i class="fa fa-shopping-cart" style="font-size: 2.2rem;"></i>
 										<div class="qty"></div> <!-- Tổng số sản phẩm trong giỏ hàng -->
 									</a>
-									<a href="#" style="text-decoration: none;" title="Đơn hàng của bạn">
+									<a href="./bill.html" style="text-decoration: none;" title="Đơn hàng của bạn">
 										<i class="fa-solid fa-receipt" style="font-size: 2.2rem;"></i>
 									</a>
 								</div>
@@ -114,7 +121,7 @@
 		<!-- SECTION -->
 		<div class="section">
 			<!-- container -->
-			<div class="container">
+			<div class="container" style="min-height: 250px;">
 				<!-- row -->
 				<div class="row">
 					<!-- Product main img -->
@@ -254,16 +261,22 @@
 					<!-- <div class="row"> -->
 					<div id="myCarousel" class="carousel slide col-md-12" data-ride="carousel">
 							<!-- Wrapper for carousel items -->
+
+							<ul class="carousel-indicators">
+								<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+								<li data-target="#myCarousel" data-slide-to="1"></li>
+								<li data-target="#myCarousel" data-slide-to="2"></li>
+							  </ul>
+
 							<div class="carousel-inner js-relative-product">
 								<!-- render -->
-								
 							</div>
 
-							<a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev"
+							<a class="carousel-control-prev" href="#myCarousel" data-slide="prev"
 																style="transform: translateX(-62%);">
 								<i class="fa fa-angle-left" style="font-size: 35px; color: #000;"></i>
 							</a>
-							<a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next"
+							<a class="carousel-control-next" href="#myCarousel" data-slide="next"
 																style="transform: translateX(48%);">
 								<i class="fa fa-angle-right" style="font-size: 35px; color: #000;"></i>
 							</a>
@@ -354,7 +367,7 @@
 		<script src="./asset/js/jquery.zoom.min.js"></script>
 		<!-- <script src="./asset/js/main.js"></script> -->
 		<script src="./asset/js/detail.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+		<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script> -->
 
 	</body>
 </html>

@@ -8,7 +8,7 @@ function getProductIdFromUrl() {
 }
 var idBook = getProductIdFromUrl();
 // console.log(idBook)
-const token = localStorage.getItem("token");
+const token = sessionStorage.getItem("token");
 console.log(token)
 if(idBook != -1) {
     $.ajax({
@@ -90,14 +90,14 @@ function setValue(data) {
             </div>
 
             <!-- Thể loại -->
-            <div class="row space-bottom" style="margin: 0;">
+            <div class="row space-bottom">
                 <div class="col-md-4">
                     <label class="control-label font-label" for="category">Thể loại</label> <br>
                     <select id="category" name="category" class="form-control input-field js-categories" disabled>
                         <option value="${data.category.id}">${data.category.name}</option>
                     </select> 
                 </div>
-                <!-- Số trang -->
+                <!-- Giá sách -->
                 <div class="col-md-4">
                     <label class="control-label font-label" for="price">Giá</label> <br>
                     <input type="number" name="price" id="price" class="form-contr-mol input-field" min="0" value = "${data.price}" required disabled>
@@ -108,9 +108,9 @@ function setValue(data) {
         <div class="col-lg-4 js-file" style="display: flex; flex-flow: column; align-items: center; margin-top: 22px;">
             <form id="form-upload">
                 <label for="img">Hình ảnh</label>
-                <input type="file" class="form-control-file" name="image" id="img" value="${data.image}" disabled>
+                <input type="file" class="form-control-file" name="image" id="input-image" disabled>
             </form>
-            <div class="image" style="margin-top: 12px;">
+            <div class="js-image" style="margin-top: 12px;">
                 <img class="image" src="http://localhost:8081/api/file/${data.image}" alt="" style="object-fit: cover; height: 300px;">
             </div>
             <input type="hidden" id="imageHidden" name="oldImage" value="${data.image}">
@@ -293,15 +293,24 @@ $(".js-btn-add").click(function() {
 
 // hiển thị ảnh tạm thời khi chọn ảnh
 $(document).ready(function() {
-    // get input
-    var input = $("#img");
-    var img = $(".image");
-    input.on("input", function() {
-        // alert("Đã thay ảnh")
-        var file = input[0].files[0];
-        const image = URL.createObjectURL(file);
-        img.attr("src", image);
-    })
+    $('#input-image').on('change', function() {
+        var file = this.files[0];
+        var reader = new FileReader();
+    
+        reader.onload = function(e) {
+          $(".js-image").html(
+            `
+                <img class="image" src="${e.target.result}" alt="" style="object-fit: cover; height: 300px;">
+            `
+        )
+        };
+    
+        if (file) {
+          reader.readAsDataURL(file);
+        }
+    });
+   
+        
 })
 
 // check các trường input có trống không
@@ -312,3 +321,23 @@ function valiDateForm(obj) {
     }
     return true;
 }
+
+
+// $(document).on('change', '#input-file', function(event) {
+//     const file = event.target.files[0];
+//     const filename = file.name;
+//     const reader = new FileReader();
+  
+//     if (file) {
+//       reader.readAsDataURL(file);
+//     }
+// });
+  
+ // Bắt sự kiện thay đổi trong input
+ 
+  
+  
+  
+  
+  
+  

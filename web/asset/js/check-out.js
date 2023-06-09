@@ -2,8 +2,8 @@
 
 const urlApiCart = "http://localhost:8081/api/user/cart/cartItems";
 const urLApiPayment = "http://localhost:8081/api/user/bill";
-const token = localStorage.getItem("token");
-const fullName = localStorage.getItem("fullName");
+const token = sessionStorage.getItem("token");
+const fullName = sessionStorage.getItem("fullName");
 
 if(!token) {
     window.location.href = "/login/login.html";
@@ -59,7 +59,7 @@ function renderListCartItem(data) {
 
 // đăng xuất
 $(".js-btn-logout").click(function() {
-    localStorage.clear();
+    sessionStorage.clear();
     window.location.href = "/login/login.html";
 })
 
@@ -127,7 +127,7 @@ $(".js-payment").click(function(e) {
         contentType: "application/json; charset=UTF-8",
         success: function(message) {
             alert(message);
-            window.location.href = "/web/cart.html";
+            window.location.href = "/web/bill.html";
         },
         error: function(xhr, status, message) {
             alert("Thanh toán lỗi rồi !");
@@ -148,3 +148,8 @@ function getValue() {
     obj["note"] = $(".js-note").val();
     return obj;
 }
+
+//search
+$('.search').submit(function(e) {
+	e.preventDefault();
+})

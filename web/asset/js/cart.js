@@ -1,7 +1,7 @@
 const urlApiCart = "http://localhost:8081/api/user/cart/cartItems";
 
-const token = localStorage.getItem("token");
-const fullName = localStorage.getItem("fullName");
+const token = sessionStorage.getItem("token");
+const fullName = sessionStorage.getItem("fullName");
 
 if(!token) {
     window.location.href = "/login/login.html";
@@ -106,8 +106,14 @@ function changeQuantity() {
     
 }
 
+
+// logout
 $(".js-btn-logout").click(function() {
-    localStorage.clear();
+    sessionStorage.clear();
     window.location.href = "/login/login.html";
 })
 
+//search
+$('.search').submit(function(e) {
+	e.preventDefault();
+})

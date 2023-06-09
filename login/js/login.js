@@ -22,13 +22,20 @@ $(document).ready(function () {
         var passwordConfirm = $("#passwordAgain").val();
         var password = $("#password").val();
         var checkPassword = check(password, passwordConfirm);
-        if(checkPassword) {
+        var checkUserName = validateUserName(inforSignup["userName"]);
+        // console.log(checkUserName);  
+        if(checkPassword && checkUserName) {
             registerUser(inforSignup);
+        }
+        else if(!checkPassword) {
+            var alertMess = $(".js-alert");
+            alertMess.css("display", "block");
+            alertMess.text("Xác nhận mật khẩu không đúng!")
         }
         else {
             var alertMess = $(".js-alert");
             alertMess.css("display", "block");
-            alertMess.text("Xác nhận mật khẩu không đúng!")
+            alertMess.text("UserName không hợp lệ!")
         }
         // login(inforSignup);
     })
@@ -45,11 +52,11 @@ function login(infor) {
         success: function(response) {
             var token = response.token;
             // set token
-            localStorage.setItem("token", token);
+            sessionStorage.setItem("token", token);
             // set role
-            localStorage.setItem("role", response.roles[0].authority)
+            sessionStorage.setItem("role", response.roles[0].authority)
             // set full name
-            localStorage.setItem("fullName", response.fullName);
+            sessionStorage.setItem("fullName", response.fullName);
             if(response.roles[0].authority === "USER") {
                 console.log(response);
                 window.location.href = "/web/index.html";
@@ -101,3 +108,8 @@ function registerUser(infor) {
 function check(password, confirmPassword) {
     return password===confirmPassword;
 }
+
+function validateUserName(userName) {
+    return userName && !/^[a-zA-Z0-9]*$/.test(userName) ? false : true;
+}
+  

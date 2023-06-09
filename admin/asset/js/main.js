@@ -1,5 +1,5 @@
 var urlBook = "http://localhost:8081/api/admin/book";
-const token = localStorage.getItem("token");
+const token = sessionStorage.getItem("token");
 console.log(token)
 $.ajax({
     type: "GET",

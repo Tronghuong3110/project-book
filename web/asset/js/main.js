@@ -171,22 +171,26 @@
 const urlApiAddBookToCart = "http://localhost:8081/api/user/cart/";
 const url = "http://localhost:8081/api/user/books";
 const urlCategory = "http://localhost:8081/api/user/categories";
-const token = localStorage.getItem("token");
-const fullName = localStorage.getItem("fullName");
+const token = sessionStorage.getItem("token");
+const fullName = sessionStorage.getItem("fullName");
 if(!token) {
 	window.location.href = "/login/login.html";
 }
 else {
 	$(".user-name").text(fullName);
 }
-function start() {
+function start(key) {
+	var keyWord = '';
+	if(key != undefined) {
+		keyWord = key
+	}
 	$.ajax({
 		type: "GET",
 		beforeSend: function(xhr) {
 			xhr.setRequestHeader('Authorization', 'Bearer ' + token);
 			// console.log('Authorization Header: '+ 'Bearer ' + token);
 		},
-		url: url + "?key",
+		url: url + `?key=${keyWord}`,
 		dataType: "JSON",
 		success: function (response) {
 			console.log(response);
@@ -218,7 +222,7 @@ function render(data) {
 								<p class="product-category" style="font-weight: 500; font-size: 1rem; color: #000;">${item.category.name}</p>
 								<h3 class="product-name">${item.name}</h3>
 								<h3 class="product-name">${item.author}</h3>
-								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+								<h4 class="product-price">${item.price} đ<del class="product-old-price">990 sđ</del></h4>
 							</div>
 						</a>
 						<div class="add-to-cart add-to-cart-new">
@@ -235,6 +239,9 @@ function render(data) {
 			}
 		}
 	})
+	if(data.length <= 0) {
+		html = "Không tồn tại sách";
+	}
 	$(".js-render").html(html);
 }
 
@@ -267,7 +274,7 @@ function renderCategory(data) {
 
 $(".js-btn-logout").click(function (e) { 
 	e.preventDefault();
-	localStorage.clear();
+	sessionStorage.clear();
 	window.location.href = '/login/login.html';
 });
 
@@ -355,3 +362,19 @@ function setQuantity() {
 	})
 }
 
+//search
+$('.search').submit(function(e) {
+	e.preventDefault();
+	var key = $(this).find("input").val().toLowerCase().trim();
+	start(key);
+	$(this).find("input").val("");
+	console.log(key)
+})
+
+// $('.js-search').on("input",function(e) {
+// 	// e.preventDefault();
+// 	// var key = $(this).find("input").input();
+// 	var key = $(this).val().toLowerCase().trim();
+// 	start(key);
+// 	console.log(key)
+// })

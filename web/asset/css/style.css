@@ -2149,6 +2149,27 @@ textarea.input {
   cursor: pointer;
 }
 
+.form-search {
+  display: flex;
+}
+
+.btn-cancel {
+    height: 52px;
+    font-size: 1.5rem;
+    margin-bottom: 32px;
+}
+
+.btn-view,
+.btn-view:hover {
+    color: #fff !important;
+    text-decoration: none !important;
+}
+
+.header-bill {
+    display: flex;
+    justify-content: space-between;
+}
+
 /*=========================================================
 	13 -> RESPONSIVE
 ===========================================================*/
